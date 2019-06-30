@@ -1,0 +1,26 @@
+body { 
+    background-color: #B5D2CB!important;
+}
+
+.n-backg-color {
+    background-color: #474350!important;
+}
+
+.b-backg-color {
+    background-color: #5E6973!important;
+}
+
+.l-color {
+    color: #F8FFF4!important;
+}
+
+.logo {
+    height: 4rem;
+}
+
+.vertically-al {
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
