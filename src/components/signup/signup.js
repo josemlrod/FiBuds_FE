@@ -1,5 +1,6 @@
 import React, {useState,} from 'react';
 import firebase from '../../services/firebase';
+import {createUser,} from '../../services/api';
 
 export default props => {
     const [fName, setFName,] = useState('');
@@ -14,35 +15,28 @@ export default props => {
     const handleIncome = e => setIncome(e.target.value);
     const handleEmail = e => setEmail(e.target.value);
     const handlePassW = e => setPassW(e.target.value);
-    const handleSubmit = (e) => {
+    
+    const handleSubmit = e => {
         e.preventDefault();
         const file = e.target.form[5].files[0];
-        let firebase_uid = '';
+        let token = ''
         firebase.auth().createUserWithEmailAndPassword(email, passW)
           .then((response) => {
-            console.log(1)
-            firebase_uid = response.user.uid;
+            token = response.user.l;
             const root = firebase.storage().ref(`/images/${email}`);
             const newImage = root.child(file.name)
             return newImage.put(file);
           })
-          .then(snapshot => {
-            console.log(2)
-            return snapshot.ref.getDownloadURL();
-          })
-          .then(avatarURL => {
-            console.log(3)
-            console.log(avatarURL)            
-          })
-          .then(response => {
-            console.log(4)
-            this.props.history.push('/');
+          .then(snapshot => snapshot.ref.getDownloadURL())
+          .then(avatar_url => createUser(fName, lName, email, token, avatar_url, income))
+          .then(_ => {
+            props.history.push('/');
           })
           .catch(err => {
             const {msg,} = err;
             setErr(msg);
           });
-    }
+    };
 
     return(
         <div className='container my-4'>
