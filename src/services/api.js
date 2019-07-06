@@ -15,6 +15,12 @@ const createUser = (
     },
 });
 
+const getUserByEmail = email => axios({
+    method: 'get',
+    url: `http://localhost:11235/user/email/${email}`,
+});
+
 export {
     createUser,
+    getUserByEmail,
 }
