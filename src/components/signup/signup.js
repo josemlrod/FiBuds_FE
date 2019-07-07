@@ -101,9 +101,7 @@ export default props => {
                 </>
             )
         } else if (authUser) {
-            return(
-                <Redirect to='/' />
-            )
+            return <Redirect to='/' />
         } else {
             return(
             <div className='container my-4'>

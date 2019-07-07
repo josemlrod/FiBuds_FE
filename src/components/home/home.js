@@ -23,9 +23,7 @@ export default props => {
                 <h1>Loading...</h1>
             )
         } else if (!authUser.user && authUser.loaded) {
-            return(
-                <Redirect to='/login' />
-            );
+            return <Redirect to='/login' />
         } else {
             return(
                 <h1>

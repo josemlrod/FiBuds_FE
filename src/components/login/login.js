@@ -53,9 +53,7 @@ export default props => {
                 </>
             )
         } else if (authUser.user) {
-            return(
-                <Redirect to='/' />
-            )
+            return <Redirect to='/' />
         }  else {
             return(
                 <div className='container vertically-al' style={{height: '80vh'}}>
