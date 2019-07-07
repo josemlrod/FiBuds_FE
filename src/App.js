@@ -6,6 +6,7 @@ import firebase from './services/firebase';
 import './App.css';
 
 import NavBar from './components/navbar';
+import Landing from './components/landing/landing';
 import Signup from './components/signup/signup';
 import Login from './components/login/login';
 import Home from './components/home/home';
@@ -32,6 +33,7 @@ export default props => {
   return (
     <>
       <Route path='/' component={NavBar} />
+      <Route path='/landing' exact component={Landing} />
       <Route path='/login' exact component={Login} />
       <Route path='/signup' exact component={Signup} />
       <Route path='/' exact component={Home} />
