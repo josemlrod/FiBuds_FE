@@ -15,10 +15,30 @@ const createUser = (
     },
 });
 
-const getUserByEmail = email => axios({
-    method: 'get',
-    url: `http://localhost:11235/user/email/${email}`,
-});
+// const getUserByEmail = email => axios({
+//     method: 'get',
+//     url: `http://localhost:11235/user/email/${email}`,
+// });
+
+const getUserByEmail = async email => {
+    const userDataCall = await axios({
+        method: 'get',
+        url: `http://localhost:11235/user/email/${email}`,
+    });
+
+    const userStatementCall = await axios({
+        method: 'get',
+        url: `http://localhost:11235/statement/detailed/${email}`,
+    })
+
+    const {data: userData,} = userDataCall.data;
+    const {data: userStatements,} = userStatementCall.data;
+    
+    return {
+        userData,
+        userStatements,
+    };
+};
 
 export {
     createUser,

@@ -100,14 +100,14 @@ export default props => {
                     </div>
                 </>
             )
-        } else if (authUser) {
+        } else if (authUser.user) {
             return <Redirect to='/' />
         } else {
             return(
-            <div className='container my-4'>
+            <div className='container my-5 py-5'>
                     <div className='row'>
                         <div className='col-12 text-center'>
-                            <h1 className='l-color'>
+                            <h1 className='l-color app-font big-title'>
                                 Sign Up!
                             </h1>
                         </div>
@@ -115,38 +115,38 @@ export default props => {
                             <form>
                                 <div className="form-row my-2">
                                     <div className="col-6 my-2">
-                                        <label htmlFor="inputName" className='l-color'>First Name</label>
+                                        <label htmlFor="inputName" className='l-color app-font font-size-form'>First Name</label>
                                         <input type="text" name='fName' className="form-control" 
                                             placeholder="First name" onChange={handleFName} />
                                     </div>
                                     <div className="col-6 my-2">
-                                        <label htmlFor="inputName" className='l-color'>Last Name</label>
+                                        <label htmlFor="inputName" className='l-color app-font font-size-form'>Last Name</label>
                                         <input type="text" name='lName' className="form-control" 
                                             placeholder="Last name" onChange={handleLName} />
                                     </div>
                                     <div className="col my-2">
-                                        <label htmlFor="inputIncome" className='l-color'>Income</label>
+                                        <label htmlFor="inputIncome" className='l-color app-font font-size-form'>Income</label>
                                         <input type="text" name='income' className="form-control" 
                                             placeholder="Income" onChange={handleIncome} />
                                     </div>
                                 </div>
                                 <div className="form-row my-2">
                                     <div className="form-group col-md-6">
-                                        <label htmlFor="inputEmail4" className='l-color'>Email</label>
+                                        <label htmlFor="inputEmail4" className='l-color app-font font-size-form'>Email</label>
                                         <input type="email" name='email' className="form-control" 
                                             id="inputEmail4" placeholder="Email" onChange={handleEmail} />
                                     </div>
                                     <div className="form-group col-md-6">
-                                        <label htmlFor="inputPassword4" className='l-color'>Password</label>
+                                        <label htmlFor="inputPassword4" className='l-color app-font font-size-form'>Password</label>
                                         <input type="password" name='passW' className="form-control" 
                                             id="inputPassword4" placeholder="Password" onChange={handlePassW} />
                                     </div>
                                     <div className="custom-file col-md-6">
-                                        <input type="file" className="custom-file-input" id="customFile"/>
+                                        <input type="file" className="custom-file-input app-font font-size-form" id="customFile"/>
                                         <label className="custom-file-label" htmlFor="customFile">Choose Profile Picture</label>
                                     </div>
                                     <div className='col-12 text-right my-2'>
-                                        <button type="submit" className="btn b-backg-color l-color text-center"
+                                        <button type="submit" className="btn b-backg-color l-color text-center app-font font-size-form"
                                             onClick={handleSubmit}>Submit</button>
                                     </div>
                                 </div>

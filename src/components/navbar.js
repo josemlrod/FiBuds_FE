@@ -1,9 +1,11 @@
-import React, {useState,} from 'react';
+import React, {useState, useContext,} from 'react';
+import {AuthContext,} from '../store';
 import {Link,} from 'react-router-dom';
 import firebase from '../services/firebase';
 import Logo from '../assets/81b5bebd-4872-4dc2-a675-5f7227d1f8d8_200x200.png';
 
 export default props => {
+    const [authUser,] = useContext(AuthContext);
     const [toggleNav, setToggleNav,] = useState(false);
     
     const toggleHandler = e => setToggleNav(!toggleNav);
@@ -13,7 +15,8 @@ export default props => {
     }
 
     const renderNav = _ => {
-        if (!toggleNav) {
+        if (!authUser.user && authUser.loaded) return <></>;
+        else if (!toggleNav) {
             return(
                 <nav className="navbar navbar-expand-lg navbar-light n-backg-color">
                     <img src={Logo} className='logo' alt='app logo' />
