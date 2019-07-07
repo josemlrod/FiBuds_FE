@@ -55,3 +55,7 @@ body {
 .font-size-form {
     font-size: 22px;
 }
+
+.b-rad {
+    border-radius: 10px;
+}
