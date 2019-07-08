@@ -23,10 +23,10 @@ export default props => {
     }, [authUser.user]);
 
     const renderHome = _ => {
-        if (!authUser.user && !authUser.loaded || !user.user && !user.loaded) {
-            return <h1>Loading...</h1>
-        } else if (!authUser.user && authUser.loaded) {
+        if (!authUser.user && authUser.loaded) {
             return <Redirect to='/landing' />
+        } else if (!authUser.user && !authUser.loaded || !user.user && !user.loaded) {
+            return <h1>Loading...</h1>
         } else {
             const {userData, userStatements,} = user.user;
             return(
