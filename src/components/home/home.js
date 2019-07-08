@@ -23,10 +23,10 @@ export default props => {
     }, [authUser.user]);
 
     const renderHome = _ => {
-        if (!authUser.user && !authUser.loaded || !user.user && !user.loaded) {
-            return <h1>Loading...</h1>
-        } else if (!authUser.user && authUser.loaded) {
+        if (!authUser.user && authUser.loaded) {
             return <Redirect to='/landing' />
+        } else if (!authUser.user && !authUser.loaded || !user.user && !user.loaded) {
+            return <h1>Loading...</h1>
         } else {
             const {userData, userStatements,} = user.user;
             return(
@@ -42,7 +42,7 @@ export default props => {
                             userStatements.length < 1 ?
                                 <div className='col-12' style={{textAlign: '-webkit-center'}}>
                                     <div 
-                                        className='col-10 b-rad py-5 n-backg-color l-color app-font font-size-form'>
+                                        className='col-10 border b-rad py-5 n-backg-color l-color app-font font-size-form'>
                                         No statements to render. Add one!
                                     </div>
                                 </div>
