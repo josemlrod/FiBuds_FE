@@ -42,7 +42,7 @@ export default props => {
                             userStatements.length < 1 ?
                                 <div className='col-12' style={{textAlign: '-webkit-center'}}>
                                     <div 
-                                        className='col-10 border b-rad py-5 n-backg-color l-color app-font font-size-form'>
+                                        className='col-10 b-rad py-5 n-backg-color l-color app-font font-size-form'>
                                         No statements to render. Add one!
                                     </div>
                                 </div>
