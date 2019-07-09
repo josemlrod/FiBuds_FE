@@ -59,3 +59,7 @@ body {
 .b-rad {
     border-radius: 10px;
 }
+
+.bottom-border-w {
+    border-bottom: 1px solid #F8FFF4!important;
+}
