@@ -1,14 +1,23 @@
-import React from 'react';
+import React, {useState,} from 'react';
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter,} from 'reactstrap';
+import {createStatement,} from '../../services/api';
 
 export default props => {
+    const [statementName, setStatementName,] = useState();
+    const [statementBudget, setStatementBudget,] = useState();
+
+    const updateStatementName = e => setStatementName(e.target.value);
+    const updateStatementBudget = e => setStatementBudget(e.target.value);
+
     const handleSubmit = _ => {
-        console.log('you clicked baby')
+        const {id: user_id,} = props.user;
+        createStatement(statementName, statementBudget, user_id, false);
+        props.toggle();
     }
+
     return (
       <div>
         <Modal isOpen={props.modal} toggle={props.toggle}>
-          {/* <ModalHeader toggle={props.toggle}>Add Statement</ModalHeader> */}
           <ModalBody className='n-backg-color rounded'>
             <div className='row' style={{justifyContent: 'center'}}>
                 <div className='col-10 bottom-border-w text-center'>
@@ -23,7 +32,8 @@ export default props => {
             </div>
             <div className='row' style={{justifyContent: 'center'}}>
                 <div className='col-11 app-font text-center l-color landing-font'>
-                    <input type='text' className='rounded' style={{width: 'inherit'}} />
+                    <input type='text' name='name' className='rounded' 
+                        style={{width: 'inherit'}} onChange={updateStatementName} />
                 </div>
             </div>
 
@@ -34,7 +44,8 @@ export default props => {
             </div>
             <div className='row' style={{justifyContent: 'center'}}>
                 <div className='col-11 app-font text-center l-color landing-font'>
-                    <input type='text' className='rounded' style={{width: 'inherit'}} />
+                    <input type='text' name='budget' className='rounded' 
+                        style={{width: 'inherit'}} onChange={updateStatementBudget} />
                 </div>
             </div>
 
@@ -45,10 +56,6 @@ export default props => {
                 </div>
             </div>
           </ModalBody>
-          {/* <ModalFooter>
-            <Button color="primary" onClick={props.toggle}>Do Something</Button>{' '}
-            <Button color="secondary" onClick={props.toggle}>Cancel</Button>
-          </ModalFooter> */}
         </Modal>
       </div>
     );

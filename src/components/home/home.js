@@ -41,7 +41,7 @@ export default props => {
             return(
                 <>
                     <div className='container'>
-                        <StatementModal toggle={toggleModal} modal={modal} />
+                        <StatementModal toggle={toggleModal} modal={modal} user={userData} />
                         <div className='row'>
                             <div className='col-12 text-right'>
                                 <button type="button" className="btn col-3 text-right" data-toggle="modal" 
