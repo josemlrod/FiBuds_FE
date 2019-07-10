@@ -37,6 +37,9 @@ const getUserByEmail = async email => {
         url: `http://fibuds.herokuapp.com/statement/all/${email}`,
     });
 
+    console.log(1, userDataCall)
+    console.log(2, userStatementCall)
+
     const {data: userData,} = userDataCall.data;
     const {data: userStatements,} = userStatementCall.data;
     
@@ -46,8 +49,25 @@ const getUserByEmail = async email => {
     };
 };
 
+const updateUser = (
+    fName, lName, email, firebase_token, avatar_url, income, id
+) => axios({
+    method: 'put',
+    url: 'http://fibuds.herokuapp.com/user/',
+    data: {
+        first_name: fName,
+        last_name: lName,
+        email,
+        firebase_token,
+        avatar_url,
+        income,
+        id,
+    },
+});
+
 export {
     createUser,
     createStatement,
     getUserByEmail,
+    updateUser,
 }

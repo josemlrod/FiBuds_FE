@@ -14,15 +14,18 @@ export default props => {
     const [modal, setModal,] = useState(false);
 
     useEffect(_ => {
+        console.log('useEffectRuns')
         if (authUser.user) {
+            console.log('authUser came, api call about to run')
             const userData = getUserByEmail(authUser.user.email)
                 .then(data => {
+                    console.log('api call ran, this is data: ', data);
                     setUserStatements(prevStatements => prevStatements.concat(data.userStatements));
                     setUser({userData: data.userData, loaded: true,});
                 })
                 .catch(e => new Error(e));
         };
-    }, [authUser.user]);
+    }, [authUser.user,]);
 
     const toggleModal = _ => setModal(!modal);
 
