@@ -53,11 +53,12 @@ export default props => {
                                     <div className='col-12' style={{textAlign: '-webkit-center'}}>
                                         <div 
                                             className='col-10 b-rad py-5 n-backg-color l-color app-font font-size-form'>
-                                            No statements to render. Add one!
+                                            No statements to render. 
+                                            Start controlling your expenses today!
                                         </div>
                                     </div>
                                 :
-                                    <StatementCard />
+                                    userStatements.map((e, i) => <StatementCard userStatement={e} key={i} />)
                             }
                         </div>
                     </div>
@@ -81,11 +82,12 @@ export default props => {
                                 <div className='col-12' style={{textAlign: '-webkit-center'}}>
                                     <div 
                                         className='col-10 b-rad py-5 n-backg-color l-color app-font font-size-form'>
-                                        No statements to render. Add one!
+                                        No statements to render. 
+                                        Start controlling your expenses today!
                                     </div>
                                 </div>
                             :
-                                <StatementCard />
+                                userStatements.map((e, i) => <StatementCard userStatement={e} key={i} />)
                         }
                     </div>
                 </div>
