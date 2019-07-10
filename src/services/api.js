@@ -15,6 +15,17 @@ const createUser = (
     },
 });
 
+const createStatement = (name, budget, user_id, saved) => axios({
+    method: 'post',
+    url: 'http://fibuds.herokuapp.com/statement/',
+    data: {
+        name,
+        budget,
+        user_id, 
+        saved,
+    },
+});
+
 const getUserByEmail = async email => {
     const userDataCall = await axios({
         method: 'get',
@@ -23,7 +34,7 @@ const getUserByEmail = async email => {
 
     const userStatementCall = await axios({
         method: 'get',
-        url: `http://fibuds.herokuapp.com/statement/detailed/${email}`,
+        url: `http://fibuds.herokuapp.com/statement/all/${email}`,
     });
 
     const {data: userData,} = userDataCall.data;
@@ -37,5 +48,6 @@ const getUserByEmail = async email => {
 
 export {
     createUser,
+    createStatement,
     getUserByEmail,
 }
