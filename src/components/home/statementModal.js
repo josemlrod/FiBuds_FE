@@ -1,5 +1,5 @@
 import React, {useState,} from 'react';
-import {Button, Modal, ModalHeader, ModalBody, ModalFooter,} from 'reactstrap';
+import {Modal, ModalBody,} from 'reactstrap';
 import {createStatement,} from '../../services/api';
 
 export default props => {
