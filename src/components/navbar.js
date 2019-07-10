@@ -19,7 +19,9 @@ export default props => {
         else if (!toggleNav) {
             return(
                 <nav className="navbar navbar-expand-lg navbar-light n-backg-color">
-                    <img src={Logo} className='logo' alt='app logo' />
+                    <Link to='/'>
+                        <img src={Logo} className='logo' alt='app logo' />
+                    </Link>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" 
                         aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation" onClick={toggleHandler}>
                         <span className="navbar-toggler-icon"></span>
@@ -40,7 +42,9 @@ export default props => {
         } else {
             return(
                 <nav className="navbar navbar-expand-lg navbar-light n-backg-color">
-                    <img src={Logo} className='logo' alt='app logo' />
+                    <Link to='/'>
+                        <img src={Logo} className='logo' alt='app logo' />
+                    </Link>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" 
                         aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation" onClick={toggleHandler}>
                         <span className="navbar-toggler-icon"></span>

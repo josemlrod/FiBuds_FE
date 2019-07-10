@@ -23,7 +23,7 @@ export default props => {
 
     return (
       <div>
-        <Modal isOpen={props.modal} toggle={props.toggle}>
+        <Modal isOpen={props.modal} toggle={props.toggle} centered={true} >
           <ModalBody className='n-backg-color rounded'>
             <div className='row' style={{justifyContent: 'center'}}>
                 <div className='col-10 bottom-border-w text-center'>
