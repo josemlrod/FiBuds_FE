@@ -5,6 +5,7 @@ import {getUserByEmail,} from '../../services/api';
 import Plus from '../../assets/plus.svg';
 
 import StatementModal from './statementModal';
+import StatementCard from './statementCard';
 
 export default props => {
     const [authUser,] = useContext(AuthContext);
@@ -56,11 +57,7 @@ export default props => {
                                         </div>
                                     </div>
                                 :
-                                    <div className='col-12 text-center'>
-                                        <div className='col-8'>
-                                            Should render statements now!
-                                        </div>
-                                    </div>
+                                    <StatementCard />
                             }
                         </div>
                     </div>
@@ -88,11 +85,7 @@ export default props => {
                                     </div>
                                 </div>
                             :
-                                <div className='col-12 text-center'>
-                                    <div className='col-8'>
-                                        Should render statements now!
-                                    </div>
-                                </div>
+                                <StatementCard />
                         }
                     </div>
                 </div>
