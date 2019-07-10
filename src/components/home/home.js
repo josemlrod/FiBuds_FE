@@ -8,23 +8,17 @@ import StatementModal from './statementModal';
 
 export default props => {
     const [authUser,] = useContext(AuthContext);
-    const [user, setUser,] = useState({
-        user: null,
-        loaded: false,
-    });
+    const [user, setUser,] = useState({userData: null,loaded: false,});
+    const [userStatements, setUserStatements,] = useState([]);
     const [modal, setModal,] = useState(false);
-
-    console.log(1, authUser);
-    console.log(2, user);
-    console.log(3, modal);
 
     useEffect(_ => {
         if (authUser.user) {
             const userData = getUserByEmail(authUser.user.email)
-                .then(data => setUser({
-                    user: data,
-                    loaded: true,
-                }))
+                .then(data => {
+                    setUserStatements(prevStatements => prevStatements.concat(data.userStatements));
+                    setUser({userData: data.userData, loaded: true,});
+                })
                 .catch(e => new Error(e));
         };
     }, [authUser.user]);
@@ -34,14 +28,15 @@ export default props => {
     const renderHome = _ => {
         if (!authUser.user && authUser.loaded) {
             return <Redirect to='/landing' />
-        } else if (!authUser.user && !authUser.loaded || !user.user && !user.loaded) {
+        } else if (!authUser.user && !authUser.loaded || !user.userData && !user.loaded) {
             return <h1>Loading...</h1>
         } else if (modal) {
-            const {userData, userStatements,} = user.user;
+            const {userData,} = user;
             return(
                 <>
                     <div className='container'>
-                        <StatementModal toggle={toggleModal} modal={modal} user={userData} />
+                        <StatementModal toggle={toggleModal} modal={modal} user={userData} 
+                            setUserStatements={setUserStatements} />
                         <div className='row'>
                             <div className='col-12 text-right'>
                                 <button type="button" className="btn col-3 text-right" data-toggle="modal" 
@@ -72,7 +67,6 @@ export default props => {
                 </>
             );
         } else {
-            const {userData, userStatements,} = user.user;
             return(
                 <div className='container'>
                     <div className='row'>

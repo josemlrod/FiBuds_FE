@@ -11,6 +11,12 @@ export default props => {
 
     const handleSubmit = _ => {
         const {id: user_id,} = props.user;
+        props.setUserStatements(prevStatements => [...prevStatements, {
+            name: statementName,
+            budget: statementBudget,
+            user_id,
+            saved: false,
+        }]);
         createStatement(statementName, statementBudget, user_id, false);
         props.toggle();
     }
