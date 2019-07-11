@@ -23,7 +23,7 @@ export default props => {
                 })
                 .catch(e => new Error(e));
         };
-    }, [authUser.user]);
+    }, [authUser.user,]);
 
     const toggleModal = _ => setModal(!modal);
 
