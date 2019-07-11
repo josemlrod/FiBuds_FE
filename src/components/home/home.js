@@ -14,9 +14,7 @@ export default props => {
     const [modal, setModal,] = useState(false);
 
     useEffect(_ => {
-        console.log('useEffectRuns')
         if (authUser.user) {
-            console.log('authUser came, api call about to run')
             const userData = getUserByEmail(authUser.user.email)
                 .then(data => {
                     setUser({userData: data.userData, loaded: true,});

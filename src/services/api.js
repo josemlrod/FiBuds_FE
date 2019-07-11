@@ -37,9 +37,6 @@ const getUserByEmail = async email => {
         url: `http://fibuds.herokuapp.com/statement/all/${email}`,
     });
 
-    console.log(1, userDataCall)
-    console.log(2, userStatementCall)
-
     const {data: userData,} = userDataCall.data;
     const {data: userStatements,} = userStatementCall.data;
     
