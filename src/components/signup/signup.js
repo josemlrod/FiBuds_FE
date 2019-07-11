@@ -19,26 +19,23 @@ export default props => {
     const handleEmail = e => setEmail(e.target.value);
     const handlePassW = e => setPassW(e.target.value);
     
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault();
-        const file = e.target.form[5].files[0];
-        let token = ''
-        firebase.auth().createUserWithEmailAndPassword(email, passW)
-          .then((response) => {
-            token = response.user.l;
+        try {
+            const file = e.target.form[5].files[0];
+            const createUserFB = await firebase.auth().createUserWithEmailAndPassword(email, passW);
+            const {l: token,} = createUserFB.user;
             const root = firebase.storage().ref(`/images/${email}`);
             const newImage = root.child(file.name)
-            return newImage.put(file);
-          })
-          .then(snapshot => snapshot.ref.getDownloadURL())
-          .then(avatar_url => createUser(fName, lName, email, token, avatar_url, income))
-          .then(_ => {
-            props.history.push('/');
-          })
-          .catch(err => {
+            const snapshot = await newImage.put(file);
+            const avatar_url = await snapshot.ref.getDownloadURL();
+            const createUserCall = await createUser(fName, lName, email, token, avatar_url, income);
+            props.history.push('/')
+
+        } catch(err) {
             const {message,} = err;
             setErr(message);
-          });
+        };
     };
 
     const renderSignUp = _ => {
@@ -100,7 +97,7 @@ export default props => {
                     </div>
                 </>
             )
-        } else if (authUser.user) {
+        } else if (authUser.loadedUserData) {
             return <Redirect to='/' />
         } else {
             return(

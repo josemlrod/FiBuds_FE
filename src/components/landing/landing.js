@@ -7,9 +7,9 @@ export default props => {
     const [authUser,] = useContext(AuthContext);
 
     const renderLanding = _ => {
-        if (!authUser.user && !authUser.loaded) {
+        if (!authUser.user && !authUser.authLoaded) {
             return <h1>Loading...</h1>;
-        } else if (authUser.user && authUser.loaded) {
+        } else if (authUser.user && authUser.authLoaded) {
             return <Redirect to='/' />;
         } else {
             return(
