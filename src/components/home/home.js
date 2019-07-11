@@ -8,7 +8,7 @@ import StatementModal from './statementModal';
 import StatementCard from './statementCard';
 
 export default props => {
-    const [authUser,] = useContext(AuthContext);
+    const [authUser, setAuthUser,] = useContext(AuthContext);
     const [user, setUser,] = useState({userData: null,loaded: false,});
     const [userStatements, setUserStatements,] = useState([]);
     const [modal, setModal,] = useState(false);
@@ -19,9 +19,14 @@ export default props => {
             console.log('authUser came, api call about to run')
             const userData = getUserByEmail(authUser.user.email)
                 .then(data => {
+<<<<<<< HEAD
                     console.log('api call ran, this is data: ', data);
                     setUserStatements(prevStatements => prevStatements.concat(data.userStatements));
+=======
+>>>>>>> fe26e4077106ee39daf42bab1ed64519c1aa6010
                     setUser({userData: data.userData, loaded: true,});
+                    setUserStatements(prevStatements => prevStatements.concat(data.userStatements));
+                    setAuthUser(authUser => Object.assign(authUser, {loadedUserData: true,}));
                 })
                 .catch(e => new Error(e));
         };
@@ -30,9 +35,9 @@ export default props => {
     const toggleModal = _ => setModal(!modal);
 
     const renderHome = _ => {
-        if (!authUser.user && authUser.loaded) {
+        if (!authUser.user && authUser.authLoaded) {
             return <Redirect to='/landing' />
-        } else if (!authUser.user && !authUser.loaded || !user.userData && !user.loaded) {
+        } else if (!authUser.user && !authUser.authLoaded || !user.userData && !user.loaded) {
             return <h1>Loading...</h1>
         } else if (modal) {
             const {userData,} = user;

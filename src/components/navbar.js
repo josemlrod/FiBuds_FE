@@ -15,7 +15,7 @@ export default props => {
     }
 
     const renderNav = _ => {
-        if (!authUser.user && authUser.loaded) return <></>;
+        if (!authUser.user && authUser.authLoaded) return <></>;
         else if (!toggleNav) {
             return(
                 <nav className="navbar navbar-expand-lg navbar-light n-backg-color">
