@@ -4,7 +4,7 @@ const createUser = (
     fName, lName, email, firebase_token, avatar_url, income
 ) => axios({
     method: 'post',
-    url: 'http://fibuds.herokuapp.com/user/',
+    url: 'https://fibuds.herokuapp.com/user/',
     data: {
         first_name: fName,
         last_name: lName,
@@ -17,7 +17,7 @@ const createUser = (
 
 const createStatement = (name, budget, user_id, saved) => axios({
     method: 'post',
-    url: 'http://fibuds.herokuapp.com/statement/',
+    url: 'https://fibuds.herokuapp.com/statement/',
     data: {
         name,
         budget,
@@ -29,12 +29,12 @@ const createStatement = (name, budget, user_id, saved) => axios({
 const getUserByEmail = async email => {
     const userDataCall = await axios({
         method: 'get',
-        url: `http://fibuds.herokuapp.com/user/email/${email}`,
+        url: `https://fibuds.herokuapp.com/user/email/${email}`,
     });
 
     const userStatementCall = await axios({
         method: 'get',
-        url: `http://fibuds.herokuapp.com/statement/all/${email}`,
+        url: `https://fibuds.herokuapp.com/statement/all/${email}`,
     });
 
     const {data: userData,} = userDataCall.data;
@@ -50,7 +50,7 @@ const updateUser = (
     fName, lName, email, firebase_token, avatar_url, income, id
 ) => axios({
     method: 'put',
-    url: 'http://fibuds.herokuapp.com/user/',
+    url: 'https://fibuds.herokuapp.com/user/',
     data: {
         first_name: fName,
         last_name: lName,
