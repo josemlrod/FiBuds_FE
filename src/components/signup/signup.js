@@ -19,26 +19,51 @@ export default props => {
     const handleEmail = e => setEmail(e.target.value);
     const handlePassW = e => setPassW(e.target.value);
     
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault();
-        const file = e.target.form[5].files[0];
-        let token = ''
-        firebase.auth().createUserWithEmailAndPassword(email, passW)
-          .then((response) => {
-            token = response.user.l;
+        try {
+            const file = e.target.form[5].files[0];
+            const createUserFB = await firebase.auth().createUserWithEmailAndPassword(email, passW);
+            console.log('response to createUserFB: ', createUserFB)
+            const {l: token,} = createUserFB.user;
             const root = firebase.storage().ref(`/images/${email}`);
             const newImage = root.child(file.name)
-            return newImage.put(file);
-          })
-          .then(snapshot => snapshot.ref.getDownloadURL())
-          .then(avatar_url => createUser(fName, lName, email, token, avatar_url, income))
-          .then(_ => {
-            props.history.push('/');
-          })
-          .catch(err => {
+            const snapshot = await newImage.put(file);
+            console.log('response to snapshot: ', snapshot)
+            const avatar_url = await snapshot.ref.getDownloadURL();
+            console.log('response to avatar_url: ', avatar_url)
+            const createUserCall = await createUser(fName, lName, email, token, avatar_url, income);
+            console.log('response to createUserCall: ', createUserCall);
+            console.log('NOW WE WILL PUSH TO HOME');
+            props.history.push('/')
+
+        } catch(err) {
+            console.log(e)
             const {message,} = err;
             setErr(message);
-          });
+        };
+        // const file = e.target.form[5].files[0];
+        // let token = ''
+        // firebase.auth().createUserWithEmailAndPassword(email, passW)
+        //   .then((response) => {
+        //     token = response.user.l;
+        //     const root = firebase.storage().ref(`/images/${email}`);
+        //     const newImage = root.child(file.name)
+        //     return newImage.put(file);
+        //   })
+        //   .then(snapshot => snapshot.ref.getDownloadURL())
+        //   .then(avatar_url => {
+        //       console.log('post request about to happen...');
+        //       createUser(fName, lName, email, token, avatar_url, income)
+        //       console.log('post request already happened...');
+        //   })
+        //   .then(_ => {
+        //     props.history.push('/');
+        //   })
+        //   .catch(err => {
+        //     const {message,} = err;
+        //     setErr(message);
+        //   });
     };
 
     const renderSignUp = _ => {
@@ -100,7 +125,7 @@ export default props => {
                     </div>
                 </>
             )
-        } else if (authUser.user) {
+        } else if (authUser.loadedUserData) {
             return <Redirect to='/' />
         } else {
             return(

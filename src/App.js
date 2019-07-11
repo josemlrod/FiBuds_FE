@@ -20,11 +20,13 @@ export default props => {
         setAuthUser({
           user,
           loaded: true,
+          loadedUserData: false,
         });
       } else {
         setAuthUser({
           user: null,
           loaded: true,
+          loadedUserData: false,
         });
       };
     });

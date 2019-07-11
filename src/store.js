@@ -6,6 +6,7 @@ export const Store = props => {
     const [authUser, setAuthUser] = useState({
         user: null,
         loaded: false,
+        loadedUserData: false,
     });
 
     return(

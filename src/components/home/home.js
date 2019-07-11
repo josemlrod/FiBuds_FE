@@ -8,7 +8,7 @@ import StatementModal from './statementModal';
 import StatementCard from './statementCard';
 
 export default props => {
-    const [authUser,] = useContext(AuthContext);
+    const [authUser, setAuthUser,] = useContext(AuthContext);
     const [user, setUser,] = useState({userData: null,loaded: false,});
     const [userStatements, setUserStatements,] = useState([]);
     const [modal, setModal,] = useState(false);
@@ -17,8 +17,9 @@ export default props => {
         if (authUser.user) {
             const userData = getUserByEmail(authUser.user.email)
                 .then(data => {
-                    setUserStatements(prevStatements => prevStatements.concat(data.userStatements));
                     setUser({userData: data.userData, loaded: true,});
+                    setUserStatements(prevStatements => prevStatements.concat(data.userStatements));
+                    setAuthUser(authUser => Object.assign(authUser, {loadedUserData: true,}));
                 })
                 .catch(e => new Error(e));
         };
