@@ -19,11 +19,6 @@ export default props => {
             console.log('authUser came, api call about to run')
             const userData = getUserByEmail(authUser.user.email)
                 .then(data => {
-<<<<<<< HEAD
-                    console.log('api call ran, this is data: ', data);
-                    setUserStatements(prevStatements => prevStatements.concat(data.userStatements));
-=======
->>>>>>> fe26e4077106ee39daf42bab1ed64519c1aa6010
                     setUser({userData: data.userData, loaded: true,});
                     setUserStatements(prevStatements => prevStatements.concat(data.userStatements));
                     setAuthUser(authUser => Object.assign(authUser, {loadedUserData: true,}));
