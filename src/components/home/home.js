@@ -28,9 +28,9 @@ export default props => {
     const toggleModal = _ => setModal(!modal);
 
     const renderHome = _ => {
-        if (!authUser.user && authUser.loaded) {
+        if (!authUser.user && authUser.authLoaded) {
             return <Redirect to='/landing' />
-        } else if (!authUser.user && !authUser.loaded || !user.userData && !user.loaded) {
+        } else if (!authUser.user && !authUser.authLoaded || !user.userData && !user.loaded) {
             return <h1>Loading...</h1>
         } else if (modal) {
             const {userData,} = user;

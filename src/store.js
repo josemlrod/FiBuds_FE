@@ -5,7 +5,7 @@ export const AuthContext = createContext();
 export const Store = props => {
     const [authUser, setAuthUser] = useState({
         user: null,
-        loaded: false,
+        authLoaded: false,
         loadedUserData: false,
     });
 
