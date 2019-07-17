@@ -10,6 +10,7 @@ export default props => {
     
     const toggleHandler = e => setToggleNav(!toggleNav);
     const handleLogOut = e => {
+        toggleHandler();
         firebase.auth().signOut();
         props.history.push('/landing')
     }
