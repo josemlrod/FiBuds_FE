@@ -63,3 +63,11 @@ body {
 .bottom-border-w {
     border-bottom: 1px solid #F8FFF4!important;
 }
+
+.border-down-b {
+    border-bottom: 1px solid #5E6973;
+}
+
+.pointer {
+    cursor: pointer;
+}

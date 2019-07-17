@@ -29,7 +29,7 @@ export default props => {
 
                     <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
                         <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-                            <li className="nav-item">
+                            <li className="nav-item border-down-b">
                                 <Link to='/' className="nav-link">Home</Link>
                             </li>
                             <li className="nav-item">
@@ -52,11 +52,11 @@ export default props => {
 
                     <div className="navbar-collapse" id="navbarTogglerDemo02">
                         <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-                            <li className="nav-item">
-                                <Link to='/' className="nav-link">Home</Link>
+                            <li className="nav-item border-down-b">
+                                <Link to='/' className="nav-link app-font l-color pointer">Home</Link>
                             </li>
                             <li className="nav-item">
-                                <span className="nav-link" onClick={handleLogOut}>Log Out</span>
+                                <span className="nav-link app-font l-color pointer" onClick={handleLogOut}>Log Out</span>
                             </li>
                         </ul>
                     </div>
