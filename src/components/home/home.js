@@ -1,6 +1,6 @@
 import React, {useState, useContext, useEffect,} from 'react';
 import {Redirect,} from 'react-router-dom';
-import {AuthContext,} from '../../store';
+import {AuthContext, UserContext,} from '../../store';
 import {getUserByEmail,} from '../../services/api';
 import Plus from '../../assets/plus.svg';
 
@@ -9,6 +9,7 @@ import StatementCard from './statementCard';
 
 export default props => {
     const [authUser, setAuthUser,] = useContext(AuthContext);
+    const [userData, setUserData,] = useContext(UserContext);
     const [user, setUser,] = useState({userData: null,loaded: false,});
     const [userStatements, setUserStatements,] = useState([]);
     const [modal, setModal,] = useState(false);
@@ -18,6 +19,7 @@ export default props => {
             const userData = getUserByEmail(authUser.user.email)
                 .then(data => {
                     setUser({userData: data.userData, loaded: true,});
+                    setUserData({userData: data, loaded: true,});
                     setUserStatements(prevStatements => prevStatements.concat(data.userStatements));
                     setAuthUser(authUser => Object.assign(authUser, {loadedUserData: true,}));
                 })

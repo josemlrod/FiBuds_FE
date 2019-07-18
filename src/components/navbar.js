@@ -1,12 +1,20 @@
-import React, {useState, useContext,} from 'react';
-import {AuthContext,} from '../store';
+import React, {useState, useContext, useEffect,} from 'react';
+import {AuthContext, UserContext,} from '../store';
 import {Link,} from 'react-router-dom';
 import firebase from '../services/firebase';
 import Logo from '../assets/81b5bebd-4872-4dc2-a675-5f7227d1f8d8_200x200.png';
+import SideNavIMG from '../assets/sidenav-img.jpg'
+import M from 'materialize-css';
 
 export default props => {
     const [authUser,] = useContext(AuthContext);
+    const [userData,] = useContext(UserContext);
     const [toggleNav, setToggleNav,] = useState(false);
+
+    useEffect(_ => {
+        M.AutoInit();
+        console.log(userData);
+    }, [userData.userData])
     
     const toggleHandler = e => setToggleNav(!toggleNav);
     const handleLogOut = e => {
@@ -19,11 +27,12 @@ export default props => {
         if (!authUser.user && authUser.authLoaded) return <></>;
         else if (!toggleNav) {
             return(
-                <nav className="navbar navbar-expand-lg navbar-light n-backg-color">
-                    <Link to='/'>
-                        <img src={Logo} className='logo' alt='app logo' />
-                    </Link>
-                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" 
+                <>
+                 {/* <nav className="navbar navbar-expand-lg navbar-light n-backg-color">
+                     <Link to='/'>
+                         <img src={Logo} className='logo' alt='app logo' />
+                     </Link>
+                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" 
                         aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation" onClick={toggleHandler}>
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -38,7 +47,35 @@ export default props => {
                             </li>
                         </ul>
                     </div>
-                </nav>
+                </nav> */}
+                    <ul id="slide-out" className="sidenav n-backg-color">
+                        <li><div className="user-view">
+                        <div className="background col-12 p-0">
+                            <img src={SideNavIMG} style={{width: 'inherit'}} />
+                        </div>
+                        <a href="#user"><img className="circle" src="images/yuna.jpg"/></a>
+                        <a href="#name"><span className="white-text name">John Doe</span></a>
+                        <a href="#email"><span className="white-text email">jdandturk@gmail.com</span></a>
+                        </div></li>
+                        <li><a href="#!"><i className="material-icons">cloud</i>First Link With Icon</a></li>
+                        <li><a href="#!">Second Link</a></li>
+                        <li><div className="divider"></div></li>
+                        <li><a className="subheader">Subheader</a></li>
+                        <li><a className="waves-effect" href="#!">Third Link With Waves</a></li>
+                    </ul>
+                    
+                    <nav>
+                        <div className="nav-wrapper">
+                        <a href="#" className="brand-logo">Logo</a>
+                        <ul id="nav-mobile" className="right hide-on-med-and-down">
+                            <li><a href="sass.html">Sass</a></li>
+                            <li><a href="badges.html">Components</a></li>
+                            <li><a href="collapsible.html">JavaScript</a></li>
+                        </ul>
+                        <a href="#" data-target="slide-out" className="sidenav-trigger"><i className="material-icons">menu</i></a>
+                        </div>
+                    </nav>
+                </>
             )
         } else {
             return(
