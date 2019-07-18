@@ -13,7 +13,7 @@ export default props => {
         toggleHandler();
         firebase.auth().signOut();
         props.history.push('/landing')
-    }
+    };
 
     const renderNav = _ => {
         if (!authUser.user && authUser.authLoaded) return <></>;
