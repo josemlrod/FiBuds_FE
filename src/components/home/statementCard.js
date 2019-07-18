@@ -1,10 +1,12 @@
 import React from 'react';
+import {Link,} from 'react-router-dom';
 
 export default props => {
+    const handleStatementClick = _ => props.handleStatementClick(props.userStatement.id);
     return(
         <>
             <div className='container pb-3'>
-                <div className='col-12 n-backg-color rounded'>
+                <div className='col-12 n-backg-color rounded' onClick={handleStatementClick}>
                     <div className='row pt-2' style={{justifyContent: 'flex-end'}}>
                         <div className='col-8 app-font l-color text-right'>
                             {

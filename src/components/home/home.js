@@ -24,8 +24,9 @@ export default props => {
                 .catch(e => new Error(e));
         };
     }, [authUser.user,]);
-
+    
     const toggleModal = _ => setModal(!modal);
+    const handleStatementClick = statementID => props.history.push(`/statement/${statementID}`);
 
     const renderHome = _ => {
         if (!authUser.user && authUser.authLoaded) {
@@ -59,7 +60,8 @@ export default props => {
                                         </div>
                                     </div>
                                 :
-                                    userStatements.map((e, i) => <StatementCard userStatement={e} key={i} />)
+                                    userStatements.map((e, i) => 
+                                        <StatementCard userStatement={e} key={i} handleStatementClick={handleStatementClick} />)
                             }
                         </div>
                     </div>
@@ -88,7 +90,8 @@ export default props => {
                                     </div>
                                 </div>
                             :
-                                userStatements.map((e, i) => <StatementCard userStatement={e} key={i} />)
+                                userStatements.map((e, i) => 
+                                    <StatementCard userStatement={e} key={i} handleStatementClick={handleStatementClick} />)
                         }
                     </div>
                 </div>
