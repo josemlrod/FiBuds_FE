@@ -26,7 +26,6 @@ export default props => {
             return <></>;
         else {
             const {avatar_url, first_name, last_name, email,} = userData.userData.userData;
-            console.log(userData);
             return(
                 <>
                  {/* <nav className="navbar navbar-expand-lg navbar-light n-backg-color">

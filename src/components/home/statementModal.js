@@ -18,8 +18,7 @@ export default props => {
             saved: 'false',
         }, ...prevStatements,]);
         createStatement(statementName, statementBudget, user_id, 'false');
-        props.toggle();
-    }
+    };
 
     return(
       <div>

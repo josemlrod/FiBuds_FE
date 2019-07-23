@@ -26,7 +26,11 @@ export default props => {
                 .then(data => {
                     setUser({userData: data.userData, loaded: true,});
                     setUserData({userData: data, loaded: true,});
-                    setUserStatements(prevStatements => prevStatements.concat(data.userStatements));
+                    setUserStatements(prevStatements => {
+                        const {userStatements: userStatementData,} = data;
+                        for (let statement of userStatementData) prevStatements.unshift(statement);
+                        return [...prevStatements];
+                    });
                     setAuthUser(authUser => Object.assign(authUser, {loadedUserData: true,}));
                 })
                 .catch(e => new Error(e));
@@ -52,8 +56,7 @@ export default props => {
                                     style={{height: 50, width: 50}} className='' />
                             </button> */}
                             <a className="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
-                            <StatementModal user={userData} 
-                                setUserStatements={setUserStatements} />
+                            <StatementModal user={userData} setUserStatements={setUserStatements} />
                         </div>
                     </div>
                     <div className='row'>
