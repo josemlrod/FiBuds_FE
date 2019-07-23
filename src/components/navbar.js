@@ -95,8 +95,10 @@ export default props => {
                                     <li><a href="collapsible.html">JavaScript</a></li>
                                 </ul>
                                 <div className='col-8'>
-                                    <img src={Logo} alt='app-logo'
-                                        style={{height: '-webkit-fill-available'}} className='brand-logo' />
+                                    <Link to='/'>
+                                        <img src={Logo} alt='app-logo'
+                                            style={{height: '-webkit-fill-available'}} className='brand-logo' />
+                                    </Link>
                                 </div>
                             </div>
                         </div>
