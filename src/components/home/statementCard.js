@@ -6,7 +6,7 @@ export default props => {
     return(
         <>
             <div className='container pb-3'>
-                <div className='col-12 n-backg-color rounded' onClick={handleStatementClick}>
+                <div className='col-12 b-backg-color rounded' onClick={handleStatementClick}>
                     <div className='row pt-2' style={{justifyContent: 'flex-end'}}>
                         <div className='col-8 app-font l-color text-right'>
                             {
