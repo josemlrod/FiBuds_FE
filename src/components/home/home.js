@@ -55,7 +55,10 @@ export default props => {
                                 <img src={Plus} alt='plus icon' 
                                     style={{height: 50, width: 50}} className='' />
                             </button> */}
-                            <a className="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+                            <a className="waves-effect waves-light modal-trigger rounded-circle" href="#modal1">
+                                <img src={Plus} alt='plus icon' 
+                                        style={{height: 50, width: 50}} className='' />
+                            </a>
                             <StatementModal user={userData} setUserStatements={setUserStatements} />
                         </div>
                     </div>
