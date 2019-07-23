@@ -3,6 +3,7 @@ import {Redirect,} from 'react-router-dom';
 import {AuthContext, UserContext,} from '../../store';
 import {getUserByEmail,} from '../../services/api';
 import Plus from '../../assets/plus.svg';
+import M from 'materialize-css';
 
 import StatementModal from './statementModal';
 import StatementCard from './statementCard';
@@ -13,8 +14,13 @@ export default props => {
     const [user, setUser,] = useState({userData: null,loaded: false,});
     const [userStatements, setUserStatements,] = useState([]);
     const [modal, setModal,] = useState(false);
-
+    
     useEffect(_ => {
+        M.AutoInit();
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.modal');
+            var instances = M.Modal.init(elems);
+        });
         if (authUser.user) {
             const userData = getUserByEmail(authUser.user.email)
                 .then(data => {
@@ -27,7 +33,11 @@ export default props => {
         };
     }, [authUser.user,]);
     
-    const toggleModal = _ => setModal(!modal);
+    const toggleModal = _ => {
+        setModal(!modal);
+        var instance = M.Modal.getInstance();
+        console.log(instance);
+    };
     const handleStatementClick = statementID => props.history.push(`/statement/${statementID}`);
 
     const renderHome = _ => {
@@ -43,11 +53,11 @@ export default props => {
                         <StatementModal toggle={toggleModal} modal={modal} user={userData} 
                             setUserStatements={setUserStatements} />
                         <div className='row'>
-                            <div className='col-12 text-right'>
-                                <button type="button" className="btn col-3 text-right" data-toggle="modal" 
-                                    data-target="#exampleModalCenter" onClick={toggleModal}>
+                            <div className='col-12 text-right mt-4'>
+                                <button type="button" className="col-3 text-right waves-effect waves-light modal-trigger" href="#modal1" 
+                                    onClick={toggleModal}>
                                     <img src={Plus} alt='plus icon' 
-                                        style={{height: 50, weight: 50}} className='my-3' />
+                                        style={{height: 50, width: 50}} className='' />
                                 </button>
                             </div>
                         </div>
@@ -73,12 +83,15 @@ export default props => {
             return(
                 <div className='container'>
                     <div className='row'>
-                        <div className='col-12 text-right'>
-                            <button type="button" className="btn col-3 text-right" data-toggle="modal" 
-                                data-target="#exampleModalCenter" onClick={toggleModal}>
+                        <div className='col-12 text-right mt-4'>
+                            {/* <button type="button" className="col-3 text-right waves-effect waves-light modal-trigger" href="#modal1"
+                                onClick={toggleModal}>
                                 <img src={Plus} alt='plus icon' 
-                                    style={{height: 50, weight: 50}} className='my-3' />
-                            </button>
+                                    style={{height: 50, width: 50}} className='' />
+                            </button> */}
+                            <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+                            <StatementModal toggle={toggleModal} modal={modal} user={userData} 
+                                setUserStatements={setUserStatements} />
                         </div>
                     </div>
                     <div className='row'>

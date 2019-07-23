@@ -23,7 +23,16 @@ export default props => {
 
     return (
       <div>
-        <Modal isOpen={props.modal} toggle={props.toggle} centered={true} >
+          <div id="modal1" className="modal bottom-sheet">
+            <div className="modal-content">
+                <h4>Modal Header</h4>
+                <p>A bunch of text</p>
+            </div>
+            <div className="modal-footer">
+                <a href="#!" className="modal-close waves-effect waves-green btn-flat">Agree</a>
+            </div>
+        </div>
+        {/* <Modal isOpen={props.modal} toggle={props.toggle} centered={true} >
           <ModalBody className='n-backg-color rounded'>
             <div className='row' style={{justifyContent: 'center'}}>
                 <div className='col-10 bottom-border-w text-center'>
@@ -62,7 +71,7 @@ export default props => {
                 </div>
             </div>
           </ModalBody>
-        </Modal>
+        </Modal> */}
       </div>
     );
 };
