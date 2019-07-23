@@ -25,7 +25,7 @@ export default props => {
         if (!authUser.user && !authUser.authLoaded || !userData.userData && !userData.loaded) 
             return <></>;
         else {
-            const {avatar_url,} = userData.userData.userData;
+            const {avatar_url, first_name, last_name, email,} = userData.userData.userData;
             console.log(userData);
             return(
                 <>
@@ -50,19 +50,27 @@ export default props => {
                     </div>
                 </nav> */}
                     <ul id="slide-out" className="sidenav n-backg-color">
-                        <li><div className="user-view">
-                        <div className="background col-12 p-0">
-                            <img src={SideNavIMG} style={{width: 'inherit'}} />
-                        </div>
-                        <a href="#user"><img className="circle" src={avatar_url}/></a>
-                        <a href="#name"><span className="white-text name">John Doe</span></a>
-                        <a href="#email"><span className="white-text email">jdandturk@gmail.com</span></a>
-                        </div></li>
-                        <li><a href="#!"><i className="material-icons">cloud</i>First Link With Icon</a></li>
+                        <li>
+                            <div className="user-view">
+                                <div className="background col-12 p-0">
+                                    <img src={SideNavIMG} style={{width: 'inherit'}} />
+                                </div>
+                                <a href="#user"><img className="circle" src={avatar_url}/></a>
+                                <a href="#name"><span className="white-text name">{first_name} {last_name}</span></a>
+                                <a href="#email"><span className="white-text email">{email}</span></a>
+                            </div>
+                        </li>
+                        <li>
+                            <Link className='l-color landing-font waves-effect' style={{textDecoration: 'none'}}>
+                                <i className="material-icons l-color">home</i>Home
+                            </Link>
+                        </li>
                         <li><a href="#!">Second Link</a></li>
                         <li><div className="divider"></div></li>
                         <li><a className="subheader">Subheader</a></li>
-                        <li><a className="waves-effect" href="#!">Third Link With Waves</a></li>
+                        <li className='text-right' onClick={handleLogOut}>
+                            <span className="waves-effect l-color landing-font px-3">Log Out</span>
+                        </li>
                     </ul>
                     
                     <nav>
