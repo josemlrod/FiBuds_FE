@@ -10,10 +10,9 @@ import StatementCard from './statementCard';
 
 export default props => {
     const [authUser, setAuthUser,] = useContext(AuthContext);
-    const [userData, setUserData,] = useContext(UserContext);
+    const [, setUserData,] = useContext(UserContext);
     const [user, setUser,] = useState({userData: null,loaded: false,});
     const [userStatements, setUserStatements,] = useState([]);
-    const [modal, setModal,] = useState(false);
     
     useEffect(_ => {
         M.AutoInit();
@@ -21,6 +20,7 @@ export default props => {
             var elems = document.querySelectorAll('.modal');
             var instances = M.Modal.init(elems);
         });
+
         if (authUser.user) {
             const userData = getUserByEmail(authUser.user.email)
                 .then(data => {
@@ -33,11 +33,6 @@ export default props => {
         };
     }, [authUser.user,]);
     
-    const toggleModal = _ => {
-        setModal(!modal);
-        var instance = M.Modal.getInstance();
-        console.log(instance);
-    };
     const handleStatementClick = statementID => props.history.push(`/statement/${statementID}`);
 
     const renderHome = _ => {
@@ -45,41 +40,8 @@ export default props => {
             return <Redirect to='/landing' />
         } else if (!authUser.user && !authUser.authLoaded || !user.userData && !user.loaded) {
             return <h1>Loading...</h1>
-        } else if (modal) {
-            const {userData,} = user;
-            return(
-                <>
-                    <div className='container'>
-                        <StatementModal toggle={toggleModal} modal={modal} user={userData} 
-                            setUserStatements={setUserStatements} />
-                        <div className='row'>
-                            <div className='col-12 text-right mt-4'>
-                                <button type="button" className="col-3 text-right waves-effect waves-light modal-trigger" href="#modal1" 
-                                    onClick={toggleModal}>
-                                    <img src={Plus} alt='plus icon' 
-                                        style={{height: 50, width: 50}} className='' />
-                                </button>
-                            </div>
-                        </div>
-                        <div className='row'>
-                            {
-                                userStatements.length < 1 ?
-                                    <div className='col-12' style={{textAlign: '-webkit-center'}}>
-                                        <div 
-                                            className='col-10 b-rad py-5 n-backg-color l-color app-font font-size-form'>
-                                            No statements to render. 
-                                            Start controlling your expenses today!
-                                        </div>
-                                    </div>
-                                :
-                                    userStatements.map((e, i) => 
-                                        <StatementCard userStatement={e} key={i} handleStatementClick={handleStatementClick} />)
-                            }
-                        </div>
-                    </div>
-                </>
-            );
         } else {
+            const {userData,} = user;
             return(
                 <div className='container'>
                     <div className='row'>
@@ -89,8 +51,8 @@ export default props => {
                                 <img src={Plus} alt='plus icon' 
                                     style={{height: 50, width: 50}} className='' />
                             </button> */}
-                            <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
-                            <StatementModal toggle={toggleModal} modal={modal} user={userData} 
+                            <a className="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+                            <StatementModal user={userData} 
                                 setUserStatements={setUserStatements} />
                         </div>
                     </div>

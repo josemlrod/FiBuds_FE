@@ -21,57 +21,44 @@ export default props => {
         props.toggle();
     }
 
-    return (
+    return(
       <div>
-          <div id="modal1" className="modal bottom-sheet">
-            <div className="modal-content">
-                <h4>Modal Header</h4>
-                <p>A bunch of text</p>
-            </div>
-            <div className="modal-footer">
-                <a href="#!" className="modal-close waves-effect waves-green btn-flat">Agree</a>
+          <div id="modal1" className="modal bottom-sheet n-backg-color" style={{height: 'auto'}}>
+            <div className="modal-content text-center n-backg-color">
+                <div className='row'>
+                    <div className='col-12 l-color app-font'>
+                        <h2>Add Statement</h2>
+                    </div>
+                </div>
+
+                <div className='row'>
+                    <div className='col-3 app-font l-color font-size-form'>
+                        Name:
+                    </div>
+                    <div className='col-9 app-font text-center l-color landing-font'>
+                        <input type='text' name='name' className='rounded w-backg-color' 
+                            style={{width: 'inherit'}} onChange={updateStatementName} />
+                    </div>
+                </div>
+                
+                <div className='row mt-2'>
+                    <div className='col-3 app-font l-color font-size-form'>
+                        Budget:
+                    </div>
+                    <div className='col-9 app-font text-center l-color landing-font'>
+                        <input type='text' name='budget' className='rounded w-backg-color' 
+                            style={{width: 'inherit'}} onChange={updateStatementBudget} />
+                    </div>
+                </div>
+                
+                <div className='row' style={{justifyContent: 'center'}}>
+                    <div className='col-12 text-right'>
+                    <button type="submit" className="btn b-backg-color app-font l-color text-center"
+                        onClick={handleSubmit}>Submit</button>
+                    </div>
+                </div>
             </div>
         </div>
-        {/* <Modal isOpen={props.modal} toggle={props.toggle} centered={true} >
-          <ModalBody className='n-backg-color rounded'>
-            <div className='row' style={{justifyContent: 'center'}}>
-                <div className='col-10 bottom-border-w text-center'>
-                    <h3 className='l-color app-font'>Add Statement</h3>
-                </div>
-            </div>
-
-            <div className='row mt-3' style={{justifyContent: 'center'}}>
-                <div className='col-11 app-font l-color landing-font'>
-                    Name:
-                </div>
-            </div>
-            <div className='row' style={{justifyContent: 'center'}}>
-                <div className='col-11 app-font text-center l-color landing-font'>
-                    <input type='text' name='name' className='rounded' 
-                        style={{width: 'inherit'}} onChange={updateStatementName} />
-                </div>
-            </div>
-
-            <div className='row mt-2' style={{justifyContent: 'center'}}>
-                <div className='col-11 app-font l-color landing-font'>
-                    Budget:
-                </div>
-            </div>
-            <div className='row' style={{justifyContent: 'center'}}>
-                <div className='col-11 app-font text-center l-color landing-font'>
-                    <input type='text' name='budget' className='rounded' 
-                        style={{width: 'inherit'}} onChange={updateStatementBudget} />
-                </div>
-            </div>
-
-            <div className='row mt-4 mb-2' style={{justifyContent: 'center'}}>
-                <div className='col-11 text-right'>
-                <button type="submit" className="btn b-backg-color l-color text-center"
-                                        onClick={handleSubmit}>Submit</button>
-                </div>
-            </div>
-          </ModalBody>
-        </Modal> */}
       </div>
     );
 };

@@ -61,7 +61,7 @@ export default props => {
                             </div>
                         </li>
                         <li>
-                            <Link className='l-color landing-font waves-effect' style={{textDecoration: 'none'}}>
+                            <Link to='/' className='l-color landing-font waves-effect' style={{textDecoration: 'none'}}>
                                 <i className="material-icons l-color">home</i>Home
                             </Link>
                         </li>
@@ -85,7 +85,7 @@ export default props => {
                                 <li><a href="collapsible.html">JavaScript</a></li>
                             </ul>
                             <a href="#" data-target="slide-out" className="sidenav-trigger"><i className="material-icons">menu</i></a> */}
-                            <div className='row'>
+                            <div className='row m-0'>
                                 <div className='col-2'>
                                     <a href="#" data-target="slide-out" className="sidenav-trigger" style={{textDecoration: 'none'}}><i className="material-icons">menu</i></a>
                                 </div>
