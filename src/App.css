@@ -17,8 +17,16 @@ body {
     background-color: #5E6973!important;
 }
 
+.w-backg-color {
+    background-color: #F8FFF4!important;
+}
+
 .l-color {
     color: #F8FFF4!important;
+}
+
+.g-color {
+    color: #474350!important;
 }
 
 .logo {
@@ -42,7 +50,7 @@ body {
 }
 
 .landing-font {
-    font-size: 20px;
+    font-size: 20px!important;
 }
 
 .button-settings {
@@ -62,4 +70,12 @@ body {
 
 .bottom-border-w {
     border-bottom: 1px solid #F8FFF4!important;
+}
+
+.border-down-b {
+    border-bottom: 1px solid #5E6973;
+}
+
+.pointer {
+    cursor: pointer;
 }

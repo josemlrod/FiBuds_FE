@@ -1,6 +1,7 @@
 import React, {useState, createContext,} from 'react';
 
 export const AuthContext = createContext();
+export const UserContext = createContext();
 
 export const Store = props => {
     const [authUser, setAuthUser] = useState({
@@ -9,9 +10,16 @@ export const Store = props => {
         loadedUserData: false,
     });
 
+    const [userData, setUserData,] = useState({
+        userData: null,
+        loaded: false,
+    });
+
     return(
         <AuthContext.Provider value={[authUser, setAuthUser]}>
-            {props.children}
+            <UserContext.Provider value={[userData, setUserData]}>
+                {props.children}
+            </UserContext.Provider>
         </AuthContext.Provider>
     );
 };

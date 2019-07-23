@@ -46,6 +46,17 @@ const getUserByEmail = async email => {
     };
 };
 
+const getStatementByID = async id => {
+    const statementDataCall = await axios({
+        method: 'get',
+        url: `http://localhost:11235/statement/${id}`,
+    });
+
+    const {data: statementData,} = statementDataCall.data;
+
+    return statementData;
+};
+
 const updateUser = (
     fName, lName, email, firebase_token, avatar_url, income, id
 ) => axios({
@@ -66,5 +77,6 @@ export {
     createUser,
     createStatement,
     getUserByEmail,
+    getStatementByID,
     updateUser,
-}
+};
