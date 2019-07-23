@@ -14,8 +14,8 @@ export default props => {
         } else {
             return(
                 <>
-                    <div className='container border n-backg-color' style={{height: '100vh'}}>
-                        <div className='row my-5 text-center'>
+                    <div className='n-backg-color' style={{height: '-webkit-fill-available'}}>
+                        <div className='row py-5 text-center'>
                             <div className='col-12 my-5 pt-5'>
                                 <img src={Logo} alt='app logo' />
                             </div>
