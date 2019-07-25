@@ -1,7 +1,8 @@
 import React, {useContext, useEffect,} from 'react';
 import {Route,} from 'react-router-dom';
-import {AuthContext,} from './store';
+import {AuthContext, UserContext,} from './store';
 import firebase from './services/firebase';
+import {getUserByEmail,} from './services/api';
 
 import './App.css';
 
@@ -13,7 +14,8 @@ import Home from './components/home/home';
 import StatementPage from './components/statementPage/statementPage';
 
 export default props => {
-  const [, setAuthUser] = useContext(AuthContext);
+  const [authUser, setAuthUser] = useContext(AuthContext);
+  const [, setUserData,] = useContext(UserContext);
 
   useEffect(_ => {
     const unsuscribe = firebase.auth().onAuthStateChanged(user => {
@@ -23,6 +25,26 @@ export default props => {
           authLoaded: true,
           loadedUserData: false,
         });
+
+        const userData = getUserByEmail(user.email)
+          .then(data => {
+            const {userStatements: userStatementData,} = data;
+            setUserData(prevUser => {
+              const {userStatements: userStatementData,} = data;
+              const statementsToRender = [];
+              for (let statement of userStatementData) statementsToRender.unshift(statement);
+              prevUser.userData = data.userData;
+              prevUser.loaded = true;
+              prevUser.statements = statementsToRender;
+              return {
+                userData: data.userData,
+                loaded: true,
+                statements: statementsToRender,
+              };
+            });
+            setAuthUser(authUser => Object.assign(authUser, {loadedUserData: true,}));
+          })
+          .catch(e => new Error(e));
       } else {
         setAuthUser({
           user: null,

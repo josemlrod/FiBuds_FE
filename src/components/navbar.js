@@ -25,7 +25,8 @@ export default props => {
         if (!authUser.user && !authUser.authLoaded || !userData.userData && !userData.loaded) 
             return <></>;
         else {
-            const {avatar_url, first_name, last_name, email,} = userData.userData.userData;
+            console.log(1, userData);
+            const {avatar_url, first_name, last_name, email,} = userData.userData;
             return(
                 <>
                  {/* <nav className="navbar navbar-expand-lg navbar-light n-backg-color">

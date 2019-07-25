@@ -12,6 +12,7 @@ export const Store = props => {
 
     const [userData, setUserData,] = useState({
         userData: null,
+        statements: [],
         loaded: false,
     });
 

@@ -1,10 +1,11 @@
 import React, {useEffect, useState, useContext,} from 'react';
 import {Redirect,} from 'react-router-dom';
-import {AuthContext,} from '../../store'
+import {AuthContext, UserContext} from '../../store'
 import {getStatementByID,} from '../../services/api';
 
 export default props => {
     const [authUser, setAuthUser,] = useContext(AuthContext);
+    const [userData,] = useContext(UserContext);
     const [statement, setStatement,] = useState({statementData: null, loaded: false,});
     
     useEffect(_ => {
@@ -20,6 +21,8 @@ export default props => {
             return <h1>Loading...</h1>
         } else {
             const {statementData,} = statement;
+            console.log(1, authUser);
+            console.log(2, userData);
             return(
                 <div className='container'>
                     <div className='row mt-5'>
