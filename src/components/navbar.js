@@ -25,7 +25,6 @@ export default props => {
         if (!authUser.user && !authUser.authLoaded || !userData.userData && !userData.loaded) 
             return <></>;
         else {
-            console.log(1, userData);
             const {avatar_url, first_name, last_name, email,} = userData.userData;
             return(
                 <>

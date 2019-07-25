@@ -21,11 +21,19 @@ body {
     background-color: #F8FFF4!important;
 }
 
+.g-backg-color {
+    background-color: #7CFFC4!important;
+}
+
 .l-color {
     color: #F8FFF4!important;
 }
 
 .g-color {
+    color: #474350!important;
+}
+
+.n-color {
     color: #474350!important;
 }
 
