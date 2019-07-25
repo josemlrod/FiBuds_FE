@@ -2,6 +2,7 @@ import React, {useEffect, useState, useContext,} from 'react';
 import {Redirect,} from 'react-router-dom';
 import {AuthContext, UserContext} from '../../store'
 import {getStatementByID,} from '../../services/api';
+import M from 'materialize-css';
 
 export default props => {
     const [authUser, setAuthUser,] = useContext(AuthContext);
@@ -9,6 +10,8 @@ export default props => {
     const [statement, setStatement,] = useState({statementData: null, loaded: false,});
     
     useEffect(_ => {
+        M.AutoInit();
+
         const {id,} = props.match.params;
         const statementData = getStatementByID(id)
             .then(statement => setStatement({statementData: statement, loaded: true,}));
@@ -26,10 +29,12 @@ export default props => {
             console.log(3, statementData);
             return(
                 <div className='container'>
-                    <div className='row mt-5 pt-3'>
+                    <div className='row mt-5'>
                         <div className='col-12' style={{textAlign: '-webkit-center'}}>
-                            <div className='col-6'>
-                                <h1 className='n-color app-font'>{statementData.name}</h1>
+                            <div className="col-12">
+                                <div className="card-body app-font n-backg-color rounded">
+                                    <h1 className='l-color'>{statementData.name}</h1>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -38,14 +43,14 @@ export default props => {
                         <div className='row'>
                             <div className='col-12'>
                                 <div className="progress">
-                                    <div className="progress-bar progress-bar-striped progress-bar-animated n-backg-color" role="progressbar" aria-valuenow="75" 
+                                    <div className="progress-bar progress-bar-striped progress-bar-animated b-backg-color" role="progressbar" aria-valuenow="75" 
                                         aria-valuemin="0" aria-valuemax="100" style={{width: "75%"}}></div>
                                 </div>
                             </div>
                         </div>
 
                         <div className='row'>
-                            <div className='col-12 my-3'>
+                            <div className='col-12 my-1'>
                                 <ul className="list-group">
                                     <li className="list-group-item n-backg-color l-color font-size-form app-font">Fixed Expenses</li>
                                     <li className="list-group-item w-backg-color">Dapibus ac facilisis in</li>
@@ -55,7 +60,7 @@ export default props => {
                                 </ul>
                             </div>
 
-                            <div className='col-12 my-3'>
+                            <div className='col-12 my-1'>
                                 <ul className="list-group">
                                     <li className="list-group-item n-backg-color l-color font-size-form app-font">Spontaneous Expenses</li>
                                     <li className="list-group-item w-backg-color">Dapibus ac facilisis in</li>
@@ -63,6 +68,20 @@ export default props => {
                                     <li className="list-group-item w-backg-color">Porta ac consectetur ac</li>
                                     <li className="list-group-item w-backg-color">Vestibulum at eros</li>
                                 </ul>
+                            </div>
+
+                            <div className='col-12 my-1'>
+                                <div className="fixed-action-btn">
+                                    <a className="btn-floating btn-large n-backg-color">
+                                        <i className="large material-icons l-color">add</i>
+                                    </a>
+                                    <ul>
+                                        <li><a className="btn-floating red"><i className="material-icons">insert_chart</i></a></li>
+                                        <li><a className="btn-floating yellow darken-1"><i className="material-icons">format_quote</i></a></li>
+                                        <li><a className="btn-floating green"><i className="material-icons">publish</i></a></li>
+                                        <li><a className="btn-floating blue"><i className="material-icons">attach_file</i></a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
