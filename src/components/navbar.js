@@ -25,30 +25,9 @@ export default props => {
         if (!authUser.user && !authUser.authLoaded || !userData.userData && !userData.loaded) 
             return <></>;
         else {
-            console.log(1, userData);
             const {avatar_url, first_name, last_name, email,} = userData.userData;
             return(
                 <>
-                 {/* <nav className="navbar navbar-expand-lg navbar-light n-backg-color">
-                     <Link to='/'>
-                         <img src={Logo} className='logo' alt='app logo' />
-                     </Link>
-                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" 
-                        aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation" onClick={toggleHandler}>
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-                        <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-                            <li className="nav-item border-down-b">
-                                <Link to='/' className="nav-link">Home</Link>
-                            </li>
-                            <li className="nav-item">
-                                <span className="nav-link" onClick={handleLogOut}>Log Out</span>
-                            </li>
-                        </ul>
-                    </div>
-                </nav> */}
                     <ul id="slide-out" className="sidenav n-backg-color">
                         <li>
                             <div className="user-view">
@@ -65,7 +44,6 @@ export default props => {
                                 <i className="material-icons l-color">home</i>Home
                             </Link>
                         </li>
-                        {/* <li><a href="#!">Second Link</a></li> */}
                         <li><div className="divider"></div></li>
                         <li className='text-right' onClick={handleLogOut}>
                             <span className="waves-effect l-color landing-font px-3">Log Out</span>
@@ -74,16 +52,6 @@ export default props => {
                     
                     <nav>
                         <div className="nav-wrapper n-backg-color">
-                            {/* <a href="#" className="border">
-                                <img src={Logo} alt='app-logo'
-                                    style={{height: '-webkit-fill-available'}} />
-                            </a>
-                            <ul id="nav-mobile" className="right hide-on-med-and-down">
-                                <li><a href="sass.html">Sass</a></li>
-                                <li><a href="badges.html">Components</a></li>
-                                <li><a href="collapsible.html">JavaScript</a></li>
-                            </ul>
-                            <a href="#" data-target="slide-out" className="sidenav-trigger"><i className="material-icons">menu</i></a> */}
                             <div className='row m-0'>
                                 <div className='col-2'>
                                     <a href="#" data-target="slide-out" className="sidenav-trigger" style={{textDecoration: 'none'}}><i className="material-icons">menu</i></a>
