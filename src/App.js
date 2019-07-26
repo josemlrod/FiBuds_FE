@@ -14,7 +14,7 @@ import Home from './components/home/home';
 import StatementPage from './components/statementPage/statementPage';
 
 export default props => {
-  const [authUser, setAuthUser] = useContext(AuthContext);
+  const [, setAuthUser] = useContext(AuthContext);
   const [, setUserData,] = useContext(UserContext);
 
   useEffect(_ => {

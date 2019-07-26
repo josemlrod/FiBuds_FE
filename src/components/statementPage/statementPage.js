@@ -10,12 +10,23 @@ export default props => {
     const [statement, setStatement,] = useState({statementData: null, loaded: false,});
     
     useEffect(_ => {
-        M.AutoInit();
-
         const {id,} = props.match.params;
         const statementData = getStatementByID(id)
             .then(statement => setStatement({statementData: statement, loaded: true,}));
     }, []);
+
+    useEffect(_ => {
+        M.AutoInit();
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.fixed-action-btn');
+            var instances = M.FloatingActionButton.init(elems);
+        });
+    });
+
+    const handleAddExpense = e => {
+        console.log('wants to add expense');
+        console.dir(e.target);
+    };
 
     const renderStatementPage = _ => {
         if (!authUser.user && authUser.authLoaded) {
@@ -73,13 +84,14 @@ export default props => {
                             <div className='col-12 my-1'>
                                 <div className="fixed-action-btn">
                                     <a className="btn-floating btn-large n-backg-color">
-                                        <i className="large material-icons l-color">add</i>
+                                        <i className="large material-icons l-color">create</i>
                                     </a>
                                     <ul>
-                                        <li><a className="btn-floating red"><i className="material-icons">insert_chart</i></a></li>
-                                        <li><a className="btn-floating yellow darken-1"><i className="material-icons">format_quote</i></a></li>
-                                        <li><a className="btn-floating green"><i className="material-icons">publish</i></a></li>
-                                        <li><a className="btn-floating blue"><i className="material-icons">attach_file</i></a></li>
+                                        <li>
+                                            <a className="btn-floating g-backg-color" onClick={handleAddExpense}> 
+                                                <i className="material-icons">attach_money</i>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
