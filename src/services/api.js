@@ -26,6 +26,18 @@ const createStatement = (name, budget, user_id, saved) => axios({
     },
 });
 
+const createExpense = (fixed, amount, user_id, statement_id, name) => axios({
+    method: 'post',
+    url: 'http://localhost:11235/expense/',
+    data: {
+        fixed,
+        amount,
+        user_id, 
+        statement_id, 
+        name,
+    },
+});
+
 const getUserByEmail = async email => {
     const userDataCall = await axios({
         method: 'get',
@@ -57,6 +69,11 @@ const getStatementByID = async id => {
     return statementData;
 };
 
+const getStatementExpenses = async (user_id, statement_id) => axios({
+    method: 'get',
+    url: `http://localhost:11235/expense/all/${user_id}/${statement_id}`,
+});
+
 const updateUser = (
     fName, lName, email, firebase_token, avatar_url, income, id
 ) => axios({
@@ -76,7 +93,9 @@ const updateUser = (
 export {
     createUser,
     createStatement,
+    createExpense,
     getUserByEmail,
     getStatementByID,
+    getStatementExpenses,
     updateUser,
 };
