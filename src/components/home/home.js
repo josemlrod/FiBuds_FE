@@ -10,13 +10,10 @@ import StatementCard from './statementCard';
 
 export default props => {
     const [authUser,] = useContext(AuthContext);
-    const [userData,] = useContext(UserContext);
-    const [, setUserStatements,] = useState([]);
+    const [userData, setUserData,] = useContext(UserContext);
+    // const [, setUserStatements,] = useState([]);
     
     useEffect(_ => {
-        console.log('useEffect is running');
-        console.log(1, authUser)
-        console.log(2, userData)
         M.AutoInit();
         document.addEventListener('DOMContentLoaded', function() {
             var elems = document.querySelectorAll('.modal');
@@ -47,7 +44,7 @@ export default props => {
         } else if (!authUser.user && !authUser.authLoaded || !userData.userData && !userData.loaded) {
             return <h1>Loading...</h1>
         } else {
-            // console.log(1, userData)
+            console.log(1, userData)
             // const {userData, statements} = userData;
             return(
                 <div className='container'>
@@ -62,7 +59,7 @@ export default props => {
                                 <img src={Plus} alt='plus icon' 
                                         style={{height: 50, width: 50}} className='' />
                             </a>
-                            <StatementModal user={userData.userData} setUserStatements={setUserStatements} />
+                            <StatementModal user={userData.userData} setUserData={setUserData} />
                         </div>
                     </div>
                     <div className='row'>
