@@ -91,3 +91,7 @@ body {
 .pointer {
     cursor: pointer;
 }
+
+.progressBar-txt {
+    font-size: 12px!important;
+}

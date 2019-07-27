@@ -15,13 +15,27 @@ export default props => {
 
     return(
         <>
+            <div className='col-12 m-2'>
+                <h2 className='text-center app-font n-color'>Percentage Used:</h2>
+            </div>
             <div className='col-12'>
                 <div className="progress">
-                    <div className="progress-bar progress-bar-striped progress-bar-animated b-backg-color" 
+                    <div className="progress-bar progress-bar-striped progress-bar-animated g-backg-color n-color" 
                         role="progressbar" aria-valuenow='50'
                         aria-valuemin="0" aria-valuemax="100" style={{width: `${percentageUsed}%`}}>
                         {percentageUsed}%
                     </div>
+                </div>
+            </div>
+            <div className='col-12 text-center'>
+                <div className='col-3 mr-3 app-font rounded d-inline-block text-wrap l-color n-backg-color progressBar-txt'>
+                    Budget: ${statementBudget}
+                </div>
+                <div className='col-3 mr-3 app-font rounded d-inline-block text-wrap l-color n-backg-color progressBar-txt'>
+                    Rem Bal: ${statementBudget - moneySpent}
+                </div>
+                <div className='col-3 rounded app-font d-inline-block text-wrap l-color n-backg-color progressBar-txt'>
+                    Spent: ${moneySpent}
                 </div>
             </div>
         </>
