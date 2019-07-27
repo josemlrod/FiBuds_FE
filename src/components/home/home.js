@@ -9,10 +9,8 @@ import StatementModal from './statementModal';
 import StatementCard from './statementCard';
 
 export default props => {
-    const [authUser, setAuthUser,] = useContext(AuthContext);
-    const [, setUserData,] = useContext(UserContext);
-    const [user, setUser,] = useState({userData: null,loaded: false,});
-    const [userStatements, setUserStatements,] = useState([]);
+    const [authUser,] = useContext(AuthContext);
+    const [userData, setUserData,] = useContext(UserContext);
     
     useEffect(_ => {
         M.AutoInit();
@@ -20,21 +18,6 @@ export default props => {
             var elems = document.querySelectorAll('.modal');
             var instances = M.Modal.init(elems);
         });
-
-        if (authUser.user) {
-            const userData = getUserByEmail(authUser.user.email)
-                .then(data => {
-                    setUser({userData: data.userData, loaded: true,});
-                    setUserData({userData: data, loaded: true,});
-                    setUserStatements(prevStatements => {
-                        const {userStatements: userStatementData,} = data;
-                        for (let statement of userStatementData) prevStatements.unshift(statement);
-                        return [...prevStatements];
-                    });
-                    setAuthUser(authUser => Object.assign(authUser, {loadedUserData: true,}));
-                })
-                .catch(e => new Error(e));
-        };
     }, [authUser.user,]);
     
     const handleStatementClick = statementID => props.history.push(`/statement/${statementID}`);
@@ -42,38 +25,32 @@ export default props => {
     const renderHome = _ => {
         if (!authUser.user && authUser.authLoaded) {
             return <Redirect to='/landing' />
-        } else if (!authUser.user && !authUser.authLoaded || !user.userData && !user.loaded) {
+        } else if (!authUser.user && !authUser.authLoaded || !userData.userData && !userData.loaded) {
             return <h1>Loading...</h1>
         } else {
-            const {userData,} = user;
             return(
                 <div className='container'>
                     <div className='row'>
                         <div className='col-12 text-right mt-4'>
-                            {/* <button type="button" className="col-3 text-right waves-effect waves-light modal-trigger" href="#modal1"
-                                onClick={toggleModal}>
-                                <img src={Plus} alt='plus icon' 
-                                    style={{height: 50, width: 50}} className='' />
-                            </button> */}
                             <a className="waves-effect waves-light modal-trigger rounded-circle" href="#modal1">
                                 <img src={Plus} alt='plus icon' 
                                         style={{height: 50, width: 50}} className='' />
                             </a>
-                            <StatementModal user={userData} setUserStatements={setUserStatements} />
+                            <StatementModal user={userData.userData} setUserData={setUserData} />
                         </div>
                     </div>
                     <div className='row'>
                         {
-                            userStatements.length < 1 ?
-                                <div className='col-12' style={{textAlign: '-webkit-center'}}>
-                                    <div 
-                                        className='col-10 b-rad py-5 n-backg-color l-color app-font font-size-form'>
-                                        No statements to render. 
-                                        Start controlling your expenses today!
+                                userData.statements.length < 1 ?
+                                    <div className='col-12' style={{textAlign: '-webkit-center'}}>
+                                        <div 
+                                            className='col-10 b-rad py-5 n-backg-color l-color app-font font-size-form'>
+                                            No statements to render. 
+                                            Start controlling your expenses today!
+                                        </div>
                                     </div>
-                                </div>
                             :
-                                userStatements.map((e, i) => 
+                                userData.statements.map((e, i) => 
                                     <StatementCard userStatement={e} key={i} handleStatementClick={handleStatementClick} />)
                         }
                     </div>

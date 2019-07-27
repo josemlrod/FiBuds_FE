@@ -1,3 +1,9 @@
+/*
+    TODO:
+        1. redesign signup
+        2. make sure html matches on the err case as well
+*/
+
 import React, {useState, useContext,} from 'react';
 import {Redirect,} from 'react-router-dom';
 import {AuthContext,} from '../../store';
@@ -30,7 +36,7 @@ export default props => {
             const snapshot = await newImage.put(file);
             const avatar_url = await snapshot.ref.getDownloadURL();
             const createUserCall = await createUser(fName, lName, email, token, avatar_url, income);
-            props.history.push('/')
+            props.history.push('/');
 
         } catch(err) {
             const {message,} = err;

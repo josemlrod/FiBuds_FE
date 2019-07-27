@@ -26,6 +26,18 @@ const createStatement = (name, budget, user_id, saved) => axios({
     },
 });
 
+const createExpense = (fixed, amount, user_id, statement_id, name) => axios({
+    method: 'post',
+    url: 'https://fibuds.herokuapp.com/expense/',
+    data: {
+        fixed,
+        amount,
+        user_id, 
+        statement_id, 
+        name,
+    },
+});
+
 const getUserByEmail = async email => {
     const userDataCall = await axios({
         method: 'get',
@@ -49,13 +61,18 @@ const getUserByEmail = async email => {
 const getStatementByID = async id => {
     const statementDataCall = await axios({
         method: 'get',
-        url: `http://localhost:11235/statement/${id}`,
+        url: `https://fibuds.herokuapp.com/statement/${id}`,
     });
 
     const {data: statementData,} = statementDataCall.data;
 
     return statementData;
 };
+
+const getStatementExpenses = async (user_id, statement_id) => axios({
+    method: 'get',
+    url: `https://fibuds.herokuapp.com/expense/all/${user_id}/${statement_id}`,
+});
 
 const updateUser = (
     fName, lName, email, firebase_token, avatar_url, income, id
@@ -76,7 +93,9 @@ const updateUser = (
 export {
     createUser,
     createStatement,
+    createExpense,
     getUserByEmail,
     getStatementByID,
+    getStatementExpenses,
     updateUser,
 };

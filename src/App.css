@@ -21,11 +21,19 @@ body {
     background-color: #F8FFF4!important;
 }
 
+.g-backg-color {
+    background-color: #7CFFC4!important;
+}
+
 .l-color {
     color: #F8FFF4!important;
 }
 
 .g-color {
+    color: #474350!important;
+}
+
+.n-color {
     color: #474350!important;
 }
 
@@ -53,6 +61,10 @@ body {
     font-size: 20px!important;
 }
 
+.reg-font-size {
+    font-size: 18px;
+}
+
 .button-settings {
     background: rgb(124,255,196);
     background: linear-gradient(90deg, rgba(124,255,196,1) 0%, rgba(181,210,203,1) 42%);
@@ -78,4 +90,8 @@ body {
 
 .pointer {
     cursor: pointer;
+}
+
+.progressBar-txt {
+    font-size: 12px!important;
 }
