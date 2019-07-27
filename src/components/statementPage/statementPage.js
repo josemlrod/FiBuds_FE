@@ -16,26 +16,23 @@ export default props => {
     const [allExpenses, setAllExpenses,] = useState({fixed: null, other: null, loaded: false,})
     
     useEffect(_ => {
-        console.log('useEffectRuns')
+        M.AutoInit();
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.modal');
+            var instances = M.Modal.init(elems);
+        });
         const {id: statement_id,} = props.match.params;
         const statementData = getStatementByID(statement_id)
             .then(statement => setStatement({statementData: statement, loaded: true,}));
-        
         if (userData.userData) {
+            console.log(2, 'userData came back, about to get expenses');
+            console.log(3, allExpenses);
             const {id: user_id,} = userData.userData;
             const statementExpenses = getStatementExpenses(user_id, statement_id)
                 .then(response => response.data.expenses)
-                .then(expenses => setAllExpenses(prevExpenses => Object.assign(prevExpenses, {fixed: expenses.fixed, other: expenses.other, loaded: true,})));
+                .then(expenses => setAllExpenses({fixed: expenses.fixed, other: expenses.other, loaded: true,}));
         };
-
-        M.AutoInit();
-        document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('.fixed-action-btn');
-            var mElems = document.querySelectorAll('.modal');
-            var mInstances = M.Modal.init(mElems);
-            var instances = M.FloatingActionButton.init(elems);
-        });
-    }, [userData.userData, allExpenses.fixed, allExpenses.other]);
+    }, [userData.userData]);
 
     const updateExpenseName = e => setExpenseName(e.target.value);
     const updateExpenseAmt = e => setExpenseAmt(e.target.value);
@@ -46,19 +43,19 @@ export default props => {
     };
 
     const renderExpenses = (expType, loadedState) => {
-        console.log(expType, loadedState);
+        // console.log(expType, loadedState);
         if (!expType && !loadedState) {
-            console.log(1);
+            // console.log(1);
             return(
                 <li className="list-group-item w-backg-color">Cargando...</li>
             )
         } else if (!expType.length && loadedState) {
-            console.log(2);
+            // console.log(2);
             return(
                 <li className="list-group-item w-backg-color">Nada que cargar</li>
             )
         } else {
-            console.log(3);
+            // console.log(3);
             return(
                 expType.map((e, i) => <ExpenseCard name={e.name} amount={e.amount} key={i} />)
             )
@@ -72,7 +69,7 @@ export default props => {
             return <h1>Loading...</h1>
         } else {
             const {statementData,} = statement;
-            console.log(10, allExpenses)
+            // console.log(10, allExpenses)
             return(
                 <div className='container'>
                     <div className='row mt-5'>
@@ -119,9 +116,62 @@ export default props => {
                                         }
                                 </ul>
                             </div>
-
+                            
                             <div className='col-12 my-1'>
-                                <div className="fixed-action-btn">
+                                <a className="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+
+                                <div id="modal1" className="modal bottom-sheet n-backg-color" style={{height: 'auto'}}>
+                                    <div className="modal-content text-center n-backg-color">
+                                        <div className='row'>
+                                            <div className='col-12 l-color app-font'>
+                                                <h2>Add Expense</h2>
+                                            </div>
+                                        </div>
+                                        <div className='row'>
+                                            <div className='col-3 app-font l-color font-size-form'>
+                                                Name:
+                                            </div>
+                                            <div className='col-9 app-font text-center l-color landing-font'>
+                                                <input type='text' name='name' className='rounded w-backg-color' 
+                                                    style={{width: 'inherit'}} onChange={updateExpenseName} />
+                                            </div>
+                                        </div>
+                                        
+                                        <div className='row'>
+                                            <div className='col-3 app-font l-color font-size-form'>
+                                                Amount:
+                                            </div>
+                                            <div className='col-9 app-font text-center l-color landing-font'>
+                                                <input type='text' name='budget' className='rounded w-backg-color' 
+                                                    style={{width: 'inherit'}} onChange={updateExpenseAmt} />
+                                            </div>
+                                        </div>
+                                        <div className='row'>
+                                            <div className='col-12 text-center'>
+                                                <div className="switch app-font l-color">
+                                                    <label>
+                                                        Spontaneous Expense
+                                                    <input type="checkbox" onChange={updateExpenseType} />
+                                                    <span className="lever"></span>
+                                                        Fixed Expense
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div className='row' style={{justifyContent: 'center'}}>
+                                            <div className='col-12 text-right'>
+                                                <button type="submit" className="btn b-backg-color app-font l-color text-center"
+                                                    onClick={handleAddExpense}>
+                                                    Add
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* <div className='col-12 my-1'>
+                                <div className="">
                                     <a className="btn-floating btn-large n-backg-color modal-trigger" href="#modal1">
                                         <i className="large material-icons l-color">create</i>
                                     </a>
@@ -177,7 +227,7 @@ export default props => {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
