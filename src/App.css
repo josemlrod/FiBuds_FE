@@ -61,6 +61,10 @@ body {
     font-size: 20px!important;
 }
 
+.reg-font-size {
+    font-size: 18px;
+}
+
 .button-settings {
     background: rgb(124,255,196);
     background: linear-gradient(90deg, rgba(124,255,196,1) 0%, rgba(181,210,203,1) 42%);

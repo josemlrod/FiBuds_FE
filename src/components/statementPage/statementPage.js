@@ -57,13 +57,16 @@ export default props => {
                 return prevExpenses;
             });
         setModalState();
+        setExpenseAmt('');
+        setExpenseName('');
+        setExpenseType(false);
     };
 
     const renderExpenses = (expType, loadedState) => {
         if (!expType && !loadedState) 
             return <li className="list-group-item w-backg-color">Cargando...</li>;
         else if (!expType.length && loadedState) 
-            return <li className="list-group-item w-backg-color">Nada que cargar</li>;
+            return <li className="list-group-item w-backg-color">No expenses added, yet</li>;
         else 
             return expType.map((e, i) => <ExpenseCard name={e.name} amount={e.amount} key={i} />);
     };
