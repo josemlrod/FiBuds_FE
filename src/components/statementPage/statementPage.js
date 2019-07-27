@@ -5,6 +5,7 @@ import {getStatementByID, createExpense, getStatementExpenses,} from '../../serv
 import M from 'materialize-css';
 
 import ExpenseCard from './expenseCard';
+import ProgressBar from './progressBar';
 
 export default props => {
     const [authUser,] = useContext(AuthContext);
@@ -26,7 +27,7 @@ export default props => {
                 .then(response => response.data.expenses)
                 .then(expenses => setAllExpenses({fixed: expenses.fixed, other: expenses.other, loaded: true,}));
         };
-    }, [userData.userData, allExpenses]);
+    }, [userData.userData, allExpenses.loaded]);
 
     useEffect(_ => {
         M.AutoInit();
@@ -92,12 +93,7 @@ export default props => {
 
                     <div className='container'>
                         <div className='row'>
-                            <div className='col-12'>
-                                <div className="progress">
-                                    <div className="progress-bar progress-bar-striped progress-bar-animated b-backg-color" role="progressbar" aria-valuenow="75" 
-                                        aria-valuemin="0" aria-valuemax="100" style={{width: "75%"}}></div>
-                                </div>
-                            </div>
+                            <ProgressBar expenses={allExpenses} statement={statement.statementData} />
                         </div>
 
                         <div className='row'>
