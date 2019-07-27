@@ -7,7 +7,7 @@ import M from 'materialize-css';
 import ExpenseCard from './expenseCard';
 
 export default props => {
-    const [authUser, setAuthUser,] = useContext(AuthContext);
+    const [authUser,] = useContext(AuthContext);
     const [userData,] = useContext(UserContext);
     const [statement, setStatement,] = useState({statementData: null, loaded: false,});
     const [expenseName, setExpenseName,] = useState('');
@@ -26,7 +26,7 @@ export default props => {
                 .then(response => response.data.expenses)
                 .then(expenses => setAllExpenses({fixed: expenses.fixed, other: expenses.other, loaded: true,}));
         };
-    }, [userData.userData]);
+    }, [userData.userData, allExpenses]);
 
     useEffect(_ => {
         M.AutoInit();
@@ -41,7 +41,22 @@ export default props => {
     const updateExpenseType = _ => setExpenseType(!expenseType);
 
     const handleAddExpense = e => {
-        console.log('hey')
+        const {id: user_id,} = userData.userData;
+        const {id: statement_id,} = statement.statementData;
+        const createExpPOST = createExpense(expenseType, expenseAmt, user_id, statement_id, expenseName);
+        expenseType ? 
+            setAllExpenses(prevExpenses => {
+                const {fixed,} = prevExpenses;
+                fixed.unshift({fixed: expenseType, amount: expenseAmt, user_id, statement_id, name: expenseName});
+                return prevExpenses;
+            })
+        :
+            setAllExpenses(prevExpenses => {
+                const {other,} = prevExpenses;
+                other.unshift({fixed: expenseType, amount: expenseAmt, user_id, statement_id, name: expenseName});
+                return prevExpenses;
+            });
+        setModalState();
     };
 
     const renderExpenses = (expType, loadedState) => {
@@ -88,12 +103,6 @@ export default props => {
                                     <li className="list-group-item n-backg-color l-color font-size-form app-font">Fixed Expenses</li>
                                         {
                                             renderExpenses(allExpenses.fixed, allExpenses.loaded)
-                                            // allExpenses.loaded ? allExpenses.fixed.length ? 
-                                            //     allExpenses.fixed.map((e, i) => <ExpenseCard name={e.name} amount={e.amount} key={i} />)
-                                            // : 
-                                            //     <li className="list-group-item w-backg-color">Nada que cargar</li>
-                                            // :
-                                            //     <li className="list-group-item w-backg-color">Cargando...</li>
                                         }
                                 </ul>
                             </div>
@@ -163,64 +172,6 @@ export default props => {
                                     </div>
                                 </div>
                             </div>
-                            {/* <div className='col-12 my-1'>
-                                <div className="">
-                                    <a className="btn-floating btn-large n-backg-color modal-trigger" href="#modal1">
-                                        <i className="large material-icons l-color">create</i>
-                                    </a>
-                                    <div>
-                                        <div id="modal1" className="modal bottom-sheet n-backg-color" style={{height: 'auto'}}>
-                                            <div className="modal-content text-center n-backg-color">
-                                                <div className='row'>
-                                                    <div className='col-12 l-color app-font'>
-                                                        <h2>Add Expense</h2>
-                                                    </div>
-                                                </div>
-                                                <div className='row'>
-                                                    <div className='col-3 app-font l-color font-size-form'>
-                                                        Name:
-                                                    </div>
-                                                    <div className='col-9 app-font text-center l-color landing-font'>
-                                                        <input type='text' name='name' className='rounded w-backg-color' 
-                                                            style={{width: 'inherit'}} onChange={updateExpenseName} />
-                                                    </div>
-                                                </div>
-                                                
-                                                <div className='row'>
-                                                    <div className='col-3 app-font l-color font-size-form'>
-                                                        Amount:
-                                                    </div>
-                                                    <div className='col-9 app-font text-center l-color landing-font'>
-                                                        <input type='text' name='budget' className='rounded w-backg-color' 
-                                                            style={{width: 'inherit'}} onChange={updateExpenseAmt} />
-                                                    </div>
-                                                </div>
-                                                <div className='row'>
-                                                    <div className='col-12 text-center'>
-                                                        <div className="switch app-font l-color">
-                                                            <label>
-                                                                Spontaneous Expense
-                                                            <input type="checkbox" onChange={updateExpenseType} />
-                                                            <span className="lever"></span>
-                                                                Fixed Expense
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div className='row' style={{justifyContent: 'center'}}>
-                                                    <div className='col-12 text-right'>
-                                                        <button type="submit" className="btn b-backg-color app-font l-color text-center"
-                                                            onClick={handleAddExpense}>
-                                                            Add
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> */}
                         </div>
                     </div>
                 </div>
