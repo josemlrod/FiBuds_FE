@@ -14,25 +14,27 @@ export default props => {
     const [expenseAmt, setExpenseAmt,] = useState('');
     const [expenseType, setExpenseType,] = useState(false);
     const [allExpenses, setAllExpenses,] = useState({fixed: null, other: null, loaded: false,})
+    const [modalState, setModalState,] = useState(false);
     
     useEffect(_ => {
-        M.AutoInit();
-        document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('.modal');
-            var instances = M.Modal.init(elems);
-        });
         const {id: statement_id,} = props.match.params;
         const statementData = getStatementByID(statement_id)
             .then(statement => setStatement({statementData: statement, loaded: true,}));
         if (userData.userData) {
-            console.log(2, 'userData came back, about to get expenses');
-            console.log(3, allExpenses);
             const {id: user_id,} = userData.userData;
             const statementExpenses = getStatementExpenses(user_id, statement_id)
                 .then(response => response.data.expenses)
                 .then(expenses => setAllExpenses({fixed: expenses.fixed, other: expenses.other, loaded: true,}));
         };
     }, [userData.userData]);
+
+    useEffect(_ => {
+        M.AutoInit();
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.modal');
+            var instances = M.Modal.init(elems);
+        });
+    }, [modalState]);
 
     const updateExpenseName = e => setExpenseName(e.target.value);
     const updateExpenseAmt = e => setExpenseAmt(e.target.value);
@@ -43,24 +45,13 @@ export default props => {
     };
 
     const renderExpenses = (expType, loadedState) => {
-        // console.log(expType, loadedState);
-        if (!expType && !loadedState) {
-            // console.log(1);
-            return(
-                <li className="list-group-item w-backg-color">Cargando...</li>
-            )
-        } else if (!expType.length && loadedState) {
-            // console.log(2);
-            return(
-                <li className="list-group-item w-backg-color">Nada que cargar</li>
-            )
-        } else {
-            // console.log(3);
-            return(
-                expType.map((e, i) => <ExpenseCard name={e.name} amount={e.amount} key={i} />)
-            )
-        }
-    }
+        if (!expType && !loadedState) 
+            return <li className="list-group-item w-backg-color">Cargando...</li>;
+        else if (!expType.length && loadedState) 
+            return <li className="list-group-item w-backg-color">Nada que cargar</li>;
+        else 
+            return expType.map((e, i) => <ExpenseCard name={e.name} amount={e.amount} key={i} />);
+    };
 
     const renderStatementPage = _ => {
         if (!authUser.user && authUser.authLoaded) {
@@ -69,7 +60,6 @@ export default props => {
             return <h1>Loading...</h1>
         } else {
             const {statementData,} = statement;
-            // console.log(10, allExpenses)
             return(
                 <div className='container'>
                     <div className='row mt-5'>
@@ -118,7 +108,8 @@ export default props => {
                             </div>
                             
                             <div className='col-12 my-1'>
-                                <a className="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+                                <a className="waves-effect waves-light modal-trigger"
+                                    onClick={setModalState} href="#modal1">Modal</a>
 
                                 <div id="modal1" className="modal bottom-sheet n-backg-color" style={{height: 'auto'}}>
                                     <div className="modal-content text-center n-backg-color">
