@@ -81,11 +81,11 @@ export default props => {
             const {statementData,} = statement;
             return(
                 <div className='container'>
-                    <div className='row mt-5'>
-                        <div className='col-12' style={{textAlign: '-webkit-center'}}>
-                            <div className="col-12">
-                                <div className="card-body app-font n-backg-color rounded">
-                                    <h1 className='l-color'>{statementData.name}</h1>
+                    <div className='row mt-4 p-0'>
+                        <div className='col-12 p-0' style={{textAlign: '-webkit-right'}}>
+                            <div className="col-6 px-2">
+                                <div className="app-font n-backg-color rounded text-center">
+                                    <a className='l-color'>{statementData.name}</a>
                                 </div>
                             </div>
                         </div>

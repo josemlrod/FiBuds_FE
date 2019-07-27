@@ -16,7 +16,7 @@ export default props => {
     return(
         <>
             <div className='col-12 m-2'>
-                <h2 className='text-center app-font n-color'>Percentage Used:</h2>
+                <h2 className='text-center app-font n-color'>💰 Used:</h2>
             </div>
             <div className='col-12'>
                 <div className="progress">
@@ -27,7 +27,7 @@ export default props => {
                     </div>
                 </div>
             </div>
-            <div className='col-12 text-center'>
+            {/* <div className='col-12 text-center'>
                 <div className='col-3 mr-3 app-font rounded d-inline-block text-wrap l-color n-backg-color progressBar-txt'>
                     Budget: ${statementBudget}
                 </div>
@@ -37,7 +37,7 @@ export default props => {
                 <div className='col-3 rounded app-font d-inline-block text-wrap l-color n-backg-color progressBar-txt'>
                     Spent: ${moneySpent}
                 </div>
-            </div>
+            </div> */}
         </>
     )
 }
