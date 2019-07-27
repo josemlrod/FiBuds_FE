@@ -107,9 +107,11 @@ export default props => {
                                 </ul>
                             </div>
                             
-                            <div className='col-12 my-1'>
-                                <a className="waves-effect waves-light modal-trigger"
-                                    onClick={setModalState} href="#modal1">Modal</a>
+                            <div className='col-12 my-2 text-right'>
+                                <a className="btn-floating btn-large n-backg-color modal-trigger" 
+                                    onClick={setModalState} href="#modal1">
+                                    <i className="large material-icons l-color">create</i>
+                                </a>
 
                                 <div id="modal1" className="modal bottom-sheet n-backg-color" style={{height: 'auto'}}>
                                     <div className="modal-content text-center n-backg-color">
