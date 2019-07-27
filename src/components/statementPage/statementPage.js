@@ -64,9 +64,9 @@ export default props => {
 
     const renderExpenses = (expType, loadedState) => {
         if (!expType && !loadedState) 
-            return <li className="list-group-item w-backg-color">Cargando...</li>;
+            return <li className="list-group-item w-backg-color app-font g-color reg-font-size">Cargando...</li>;
         else if (!expType.length && loadedState) 
-            return <li className="list-group-item w-backg-color">No expenses added, yet</li>;
+            return <li className="list-group-item w-backg-color app-font g-color reg-font-size">No expenses added, yet</li>;
         else 
             return expType.map((e, i) => <ExpenseCard name={e.name} amount={e.amount} key={i} />);
     };
