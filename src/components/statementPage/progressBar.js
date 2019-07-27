@@ -10,7 +10,7 @@ export default props => {
         for(let expense of expenses.other) moneySpent += parseInt(expense.amount, 10);
     };
 
-    const percentageCalc = (budget, totalSpent) => ((budget - totalSpent) * 100) / budget;
+    const percentageCalc = (budget, totalSpent) => (totalSpent * 100) / budget;
     const percentageUsed = percentageCalc(statementBudget, moneySpent).toString().slice(0, 5);
 
     return(
