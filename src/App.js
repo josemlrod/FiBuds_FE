@@ -26,7 +26,7 @@ export default props => {
           loadedUserData: false,
         });
 
-        const userData = getUserByEmail(user.email)
+        const userDataCall = getUserByEmail(user.email)
           .then(data => {
             const {userStatements: userStatementData,} = data;
             setUserData(prevUser => {
