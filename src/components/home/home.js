@@ -9,7 +9,7 @@ import StatementModal from './statementModal';
 import StatementCard from './statementCard';
 
 export default props => {
-    const [authUser,] = useContext(AuthContext);
+    const [authUser, setAuthUser,] = useContext(AuthContext);
     const [userData, setUserData,] = useContext(UserContext);
     
     useEffect(_ => {
@@ -18,6 +18,28 @@ export default props => {
             var elems = document.querySelectorAll('.modal');
             var instances = M.Modal.init(elems);
         });
+    
+        if (!authUser.loadedUserData && authUser.user) {
+            const userDataCall = getUserByEmail(authUser.user.email)
+                .then(data => {
+                const {userStatements: userStatementData,} = data;
+                setUserData(prevUser => {
+                  const {userStatements: userStatementData,} = data;
+                  const statementsToRender = [];
+                  for (let statement of userStatementData) statementsToRender.unshift(statement);
+                  prevUser.userData = data.userData;
+                  prevUser.loaded = true;
+                  prevUser.statements = statementsToRender;
+                  return {
+                    userData: data.userData,
+                    loaded: true,
+                    statements: statementsToRender,
+                  };
+                });
+                setAuthUser(authUser => Object.assign(authUser, {loadedUserData: true,}));
+            })
+            .catch(e => new Error(e));
+        };
     }, [authUser.user,]);
     
     const handleStatementClick = statementID => props.history.push(`/statement/${statementID}`);
