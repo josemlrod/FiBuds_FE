@@ -4,7 +4,7 @@ const createUser = (
     fName, lName, email, firebase_token, avatar_url, income
 ) => axios({
     method: 'post',
-    url: 'https://fibuds.herokuapp.com/user/',
+    url: 'http://localhost:11235/user/',
     data: {
         first_name: fName,
         last_name: lName,
@@ -17,7 +17,7 @@ const createUser = (
 
 const createStatement = (name, budget, user_id, saved) => axios({
     method: 'post',
-    url: 'https://fibuds.herokuapp.com/statement/',
+    url: 'http://localhost:11235/statement/',
     data: {
         name,
         budget,
@@ -28,7 +28,7 @@ const createStatement = (name, budget, user_id, saved) => axios({
 
 const createExpense = (fixed, amount, user_id, statement_id, name) => axios({
     method: 'post',
-    url: 'https://fibuds.herokuapp.com/expense/',
+    url: 'http://localhost:11235/expense/',
     data: {
         fixed,
         amount,
@@ -41,12 +41,12 @@ const createExpense = (fixed, amount, user_id, statement_id, name) => axios({
 const getUserByEmail = async email => {
     const userDataCall = await axios({
         method: 'get',
-        url: `https://fibuds.herokuapp.com/user/email/${email}`,
+        url: `http://localhost:11235/user/email/${email}`,
     });
 
     const userStatementCall = await axios({
         method: 'get',
-        url: `https://fibuds.herokuapp.com/statement/all/${email}`,
+        url: `http://localhost:11235/statement/all/${email}`,
     });
 
     const {data: userData,} = userDataCall.data;
@@ -61,7 +61,7 @@ const getUserByEmail = async email => {
 const getStatementByID = async id => {
     const statementDataCall = await axios({
         method: 'get',
-        url: `https://fibuds.herokuapp.com/statement/${id}`,
+        url: `http://localhost:11235/statement/${id}`,
     });
 
     const {data: statementData,} = statementDataCall.data;
@@ -71,14 +71,14 @@ const getStatementByID = async id => {
 
 const getStatementExpenses = async (user_id, statement_id) => axios({
     method: 'get',
-    url: `https://fibuds.herokuapp.com/expense/all/${user_id}/${statement_id}`,
+    url: `http://localhost:11235/expense/all/${user_id}/${statement_id}`,
 });
 
 const updateUser = (
     fName, lName, email, firebase_token, avatar_url, income, id
 ) => axios({
     method: 'put',
-    url: 'https://fibuds.herokuapp.com/user/',
+    url: 'http://localhost:11235/user/',
     data: {
         first_name: fName,
         last_name: lName,

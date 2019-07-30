@@ -19,11 +19,11 @@ export default props => {
     
     useEffect(_ => {
         const {id: statement_id,} = props.match.params;
-        const statementData = getStatementByID(statement_id)
+        getStatementByID(statement_id)
             .then(statement => setStatement({statementData: statement, loaded: true,}));
         if (userData.userData) {
             const {id: user_id,} = userData.userData;
-            const statementExpenses = getStatementExpenses(user_id, statement_id)
+            getStatementExpenses(user_id, statement_id)
                 .then(response => response.data.expenses)
                 .then(expenses => setAllExpenses({fixed: expenses.fixed, other: expenses.other, loaded: true,}));
         };

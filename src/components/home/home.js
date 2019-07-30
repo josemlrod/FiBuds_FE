@@ -20,9 +20,8 @@ export default props => {
         });
     
         if (!authUser.loadedUserData && authUser.user) {
-            const userDataCall = getUserByEmail(authUser.user.email)
+            getUserByEmail(authUser.user.email)
                 .then(data => {
-                const {userStatements: userStatementData,} = data;
                 setUserData(prevUser => {
                   const {userStatements: userStatementData,} = data;
                   const statementsToRender = [];
