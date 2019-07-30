@@ -19,11 +19,11 @@ export default props => {
     
     useEffect(_ => {
         const {id: statement_id,} = props.match.params;
-        const statementData = getStatementByID(statement_id)
+        getStatementByID(statement_id)
             .then(statement => setStatement({statementData: statement, loaded: true,}));
         if (userData.userData) {
             const {id: user_id,} = userData.userData;
-            const statementExpenses = getStatementExpenses(user_id, statement_id)
+            getStatementExpenses(user_id, statement_id)
                 .then(response => response.data.expenses)
                 .then(expenses => setAllExpenses({fixed: expenses.fixed, other: expenses.other, loaded: true,}));
         };
@@ -33,7 +33,7 @@ export default props => {
         M.AutoInit();
         document.addEventListener('DOMContentLoaded', function() {
             var elems = document.querySelectorAll('.modal');
-            var instances = M.Modal.init(elems);
+            M.Modal.init(elems);
         });
     }, [modalState]);
 
@@ -44,7 +44,7 @@ export default props => {
     const handleAddExpense = e => {
         const {id: user_id,} = userData.userData;
         const {id: statement_id,} = statement.statementData;
-        const createExpPOST = createExpense(expenseType, expenseAmt, user_id, statement_id, expenseName);
+        createExpense(expenseType, expenseAmt, user_id, statement_id, expenseName);
         expenseType ? 
             setAllExpenses(prevExpenses => {
                 const {fixed,} = prevExpenses;

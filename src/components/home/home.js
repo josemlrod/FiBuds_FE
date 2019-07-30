@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect,} from 'react';
+import React, {useContext, useEffect,} from 'react';
 import {Redirect,} from 'react-router-dom';
 import {AuthContext, UserContext,} from '../../store';
 import {getUserByEmail,} from '../../services/api';
@@ -16,13 +16,12 @@ export default props => {
         M.AutoInit();
         document.addEventListener('DOMContentLoaded', function() {
             var elems = document.querySelectorAll('.modal');
-            var instances = M.Modal.init(elems);
+            M.Modal.init(elems);
         });
     
         if (!authUser.loadedUserData && authUser.user) {
-            const userDataCall = getUserByEmail(authUser.user.email)
+            getUserByEmail(authUser.user.email)
                 .then(data => {
-                const {userStatements: userStatementData,} = data;
                 setUserData(prevUser => {
                   const {userStatements: userStatementData,} = data;
                   const statementsToRender = [];

@@ -1,5 +1,4 @@
 import React, {useState,} from 'react';
-import {Modal, ModalBody,} from 'reactstrap';
 import {createStatement,} from '../../services/api';
 
 export default props => {
