@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect,} from 'react';
+import React, {useContext, useEffect,} from 'react';
 import {AuthContext, UserContext,} from '../store';
 import {Link,} from 'react-router-dom';
 import firebase from '../services/firebase';

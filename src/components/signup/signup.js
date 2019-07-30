@@ -35,7 +35,7 @@ export default props => {
             const newImage = root.child(file.name)
             const snapshot = await newImage.put(file);
             const avatar_url = await snapshot.ref.getDownloadURL();
-            const createUserCall = await createUser(fName, lName, email, token, avatar_url, income);
+            await createUser(fName, lName, email, token, avatar_url, income);
             props.history.push('/');
 
         } catch(err) {

@@ -33,7 +33,7 @@ export default props => {
         M.AutoInit();
         document.addEventListener('DOMContentLoaded', function() {
             var elems = document.querySelectorAll('.modal');
-            var instances = M.Modal.init(elems);
+            M.Modal.init(elems);
         });
     }, [modalState]);
 
@@ -44,7 +44,7 @@ export default props => {
     const handleAddExpense = e => {
         const {id: user_id,} = userData.userData;
         const {id: statement_id,} = statement.statementData;
-        const createExpPOST = createExpense(expenseType, expenseAmt, user_id, statement_id, expenseName);
+        createExpense(expenseType, expenseAmt, user_id, statement_id, expenseName);
         expenseType ? 
             setAllExpenses(prevExpenses => {
                 const {fixed,} = prevExpenses;

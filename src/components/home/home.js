@@ -16,7 +16,7 @@ export default props => {
         M.AutoInit();
         document.addEventListener('DOMContentLoaded', function() {
             var elems = document.querySelectorAll('.modal');
-            var instances = M.Modal.init(elems);
+            M.Modal.init(elems);
         });
     
         if (!authUser.loadedUserData && authUser.user) {
