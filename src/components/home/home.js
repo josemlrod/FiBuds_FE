@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect,} from 'react';
+import React, {useContext, useEffect,} from 'react';
 import {Redirect,} from 'react-router-dom';
 import {AuthContext, UserContext,} from '../../store';
 import {getUserByEmail,} from '../../services/api';

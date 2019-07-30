@@ -34,9 +34,9 @@ export default props => {
                                 <div className="background col-12 p-0">
                                     <img src={SideNavIMG} style={{width: 'inherit'}} />
                                 </div>
-                                <a href="#user"><img className="circle" src={avatar_url}/></a>
-                                <a href="#name"><span className="white-text name">{first_name} {last_name}</span></a>
-                                <a href="#email"><span className="white-text email">{email}</span></a>
+                                <a><img className="circle" src={avatar_url}/></a>
+                                <a><span className="white-text name">{first_name} {last_name}</span></a>
+                                <a><span className="white-text email">{email}</span></a>
                             </div>
                         </li>
                         <li>
@@ -55,12 +55,7 @@ export default props => {
                             <div className='row m-0'>
                                 <div className='col-2'>
                                     <a href="#" data-target="slide-out" className="sidenav-trigger" style={{textDecoration: 'none'}}><i className="material-icons">menu</i></a>
-                                </div>
-                                <ul id="nav-mobile" className="right hide-on-med-and-down">
-                                    <li><a href="sass.html">Sass</a></li>
-                                    <li><a href="badges.html">Components</a></li>
-                                    <li><a href="collapsible.html">JavaScript</a></li>
-                                </ul>
+                                </div>                                
                                 <div className='col-8'>
                                     <Link to='/'>
                                         <img src={Logo} alt='app-logo'
